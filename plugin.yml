@@ -1,0 +1,41 @@
+name: EpicBoss-Recoded
+version: 1.0.0
+description: This plugin lets you fight EpicBosses!
+author: ThaH3lper
+website: http://dev.bukkit.org/server-mods/epicboss/
+
+main: me.ThaH3lper.com.EpicBoss
+
+commands:
+  EpicBoss:
+    description: Use it to spawn a boss!
+    aliases: [eb]
+
+permissions:
+  epicboss.spawn:
+    description: Gives access to spawn a boss!
+    default: op
+  epicboss.killall:
+    description: Gives access to kill all bosses!
+    default: op
+  epicboss.killtype:
+    description: Gives access to kill a type of boss!
+    default: op
+  epicboss.setlocation:
+    description: Gives access to set a location!
+    default: op
+  epicboss.removelocation:
+    description: Gives access to remove a location!
+    default: op
+  epicboss.reload:
+    description: Gives access to reload the config!
+    default: op
+  epicboss.newtimer:
+    description: Gives access to create new timer!
+    default: op
+  epicboss.timers:
+    description: Gives access to see timers!
+    default: op
+  epicboss.removetimers:
+    description: Gives access to remove timers!
+    default: op
