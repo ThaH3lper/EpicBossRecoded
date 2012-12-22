@@ -84,5 +84,9 @@ public class Boss {
 	{
 		return id;
 	}
+	public Location getLocation()
+	{
+		return entity.getLocation();
+	}
 
 }
