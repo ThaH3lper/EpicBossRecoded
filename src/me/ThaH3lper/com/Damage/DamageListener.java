@@ -3,6 +3,7 @@ package me.ThaH3lper.com.Damage;
 import me.ThaH3lper.com.EpicBoss;
 import me.ThaH3lper.com.Boss.Boss;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.Entity;
@@ -16,6 +17,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 public class DamageListener implements Listener{
 	private EpicBoss eb;
@@ -87,11 +90,21 @@ public class DamageListener implements Listener{
 						if(Damager instanceof Player)
 						{
 							Player p = (Player) Damager;
-							String s = boss.getName() + " - [" + boss.getHealth() + "/" + boss.getMaxHealth() + "]";
+							String s = ChatColor.RED + boss.getName() + ChatColor.GRAY + " [" +ChatColor.DARK_RED + boss.getHealth() + ChatColor.GRAY + "/" + ChatColor.DARK_RED + boss.getMaxHealth() + ChatColor.GRAY + "]";
 							p.sendMessage(s);						
 						}
 					}
 				}
+			}
+		}
+	}
+	@EventHandler(priority=EventPriority.HIGH)
+	  public void BossNoLose(EntityDamageEvent event)
+	{
+		if(eb.bossCalculator.isBoss(event.getEntity())){
+			if(!(event.getCause() == DamageCause.ENTITY_ATTACK || event.getCause() == DamageCause.PROJECTILE))
+			{
+				event.setCancelled(true);
 			}
 		}
 	}

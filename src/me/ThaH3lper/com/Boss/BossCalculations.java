@@ -1,5 +1,7 @@
 package me.ThaH3lper.com.Boss;
 
+import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
@@ -45,6 +47,23 @@ public class BossCalculations {
 		if(e.getHealth() == e.getMaxHealth())
 		{
 			return true;
+		}
+		return false;
+	}
+	public Boolean BossExist(Boss b)
+	{
+		if(b.getLivingEntity() != null)
+		{
+			for(World w : Bukkit.getWorlds())
+			{
+				for(Entity e : w.getEntities())
+				{
+					if(b.getId() == e.getEntityId())
+					{
+						return true;
+					}
+				}
+			}
 		}
 		return false;
 	}

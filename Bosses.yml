@@ -1,0 +1,20 @@
+Bosses:
+  ZombieKing:
+    Type: zombie
+    Health: 200
+    Damage: 10
+    Skills: 
+    - jump
+    - speed_1
+    - teleport
+    - lightning
+    - blindness_short
+    - zombie_swarm_small
+    - effectfire
+    SkillsInterval: 12
+    Drops:
+    - 264:0:20 100
+    - 35:14:16 100
+    - 320:0:16 100
+    - 373:8233:5 50
+    - 276:0:1 50 KNOCKBACK:2,DAMAGE_ALL:5,FIRE_ASPECT:2

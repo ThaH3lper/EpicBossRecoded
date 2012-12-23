@@ -5,26 +5,26 @@ import org.bukkit.entity.LivingEntity;
 
 public class Boss {
 	
-	String name;
+	String name, entityspawnname;
 	int MaxHealth;
 	int Health;
 	LivingEntity entity;
-	int id;
 	int damage;
 	boolean showHp;
-	Location location;
+	Location spawnlocation, savedlocation;
+	boolean saved = true;
 	
 	
-	public Boss(String newname, int newmaxhealth, LivingEntity newentity, int newdamage, boolean newshowHP)
+	public Boss(String newname, int newmaxhealth, Location newspawnlocation, String newentityspawnname, int newdamage, boolean newshowHP)
 	{
 		name = newname;
 		MaxHealth = newmaxhealth;
 		Health = newmaxhealth;
-		entity = newentity;
-		id = newentity.getEntityId();
 		damage = newdamage;
 		showHp = newshowHP;
-		location = entity.getLocation();
+		spawnlocation = newspawnlocation;
+		savedlocation = newspawnlocation;
+		entityspawnname = newentityspawnname;
 	}
 	public int getDamage()
 	{
@@ -71,6 +71,7 @@ public class Boss {
 		name = i;
 	}
 	
+	//Needs Entity
 	public LivingEntity getLivingEntity()
 	{
 		return entity;
@@ -80,13 +81,40 @@ public class Boss {
 		entity = i;
 	}
 	
+	//Needs Entity
 	public int getId()
 	{
-		return id;
+		return entity.getEntityId();
 	}
 	public Location getLocation()
 	{
 		return entity.getLocation();
+	}
+	
+	public Location getSpawnLocation()
+	{
+		return spawnlocation;
+	}
+	
+	public void setSavedLocation(Location l)
+	{
+		savedlocation = l;
+	}
+	public Location getSavedLocation()
+	{
+		return savedlocation;
+	}
+	public void setSaved(boolean i)
+	{
+		saved = i;
+	}
+	public boolean getSaved()
+	{
+		return saved;
+	}
+	public String getEntitySpawnName()
+	{
+		return entityspawnname;
 	}
 
 }
