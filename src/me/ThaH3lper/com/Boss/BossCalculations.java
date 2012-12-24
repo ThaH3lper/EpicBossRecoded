@@ -56,12 +56,18 @@ public class BossCalculations {
 		{
 			for(World w : Bukkit.getWorlds())
 			{
-				for(Entity e : w.getEntities())
+				try
 				{
-					if(b.getId() == e.getEntityId())
+					for(Entity e : w.getEntities())
 					{
-						return true;
+						if(b.getId() == e.getEntityId())
+						{
+							return true;
+						}
 					}
+				}
+				catch (Exception e) {
+					return null;
 				}
 			}
 		}

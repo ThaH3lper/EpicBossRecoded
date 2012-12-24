@@ -15,7 +15,7 @@ public class DamageMethods {
 		if(b.getItems() != null)
 		{
 			for(String s:b.getItems())
-				eb.dropitems.dropItems(eb.loaditems.getItem(s), eb.loaditems.getItemChance(s), b.getLocation());
+				eb.dropitems.dropItems(eb.loaditems.getItem(s), eb.loaditems.getItemChance(s), b.getLocation(), eb.loaditems.getDisplayName(s));
 		}
 		if(b.getLivingEntity() != null)
 		{

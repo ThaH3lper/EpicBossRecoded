@@ -31,6 +31,8 @@ public class BossEggListener implements Listener{
 	{
 		if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)
 		{
+			if(e.getItem() != null)
+			{
 			if(e.getItem().getTypeId() == 383)
 			{
 				if(e.getItem().getItemMeta().hasLore())
@@ -70,6 +72,7 @@ public class BossEggListener implements Listener{
 						}
 					}
 				}
+			}
 			}
 		}
 	}

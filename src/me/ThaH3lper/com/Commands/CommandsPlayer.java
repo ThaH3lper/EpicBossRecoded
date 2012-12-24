@@ -49,7 +49,7 @@ public class CommandsPlayer{
 				LoadBoss lb = eb.loadconfig.getLoadBoss(name);
 				if(lb != null)
 				{
-					p.sendMessage(ChatColor.GREEN + "You spawned " + ChatColor.DARK_PURPLE + lb.getName() + ChatColor.GREEN + " and he has " + ChatColor.DARK_PURPLE + lb.getHealth() + ChatColor.GREEN + "Hp");
+					p.sendMessage(ChatColor.GREEN + "You spawned " + ChatColor.DARK_PURPLE + lb.getName() + ChatColor.GREEN + " and he has " + ChatColor.DARK_PURPLE + lb.getHealth() + ChatColor.GREEN + " Hp");
 					eb.BossList.add(new Boss(lb.getName(), lb.getHealth(), p.getLocation(), lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems()));
 					
 					//Call despawner/spawner for instant spawn!
@@ -76,7 +76,7 @@ public class CommandsPlayer{
 		case 0:
 			p.sendMessage(s);
 			p.sendMessage(ChatColor.RED + "/eb help bossinfo" + ChatColor.GRAY + ChatColor.ITALIC + " Show info about Bosses");
-			p.sendMessage(ChatColor.RED + "/eb reload" + ChatColor.GRAY + ChatColor.ITALIC + " Reload chnages in Bosses.yml");
+			p.sendMessage(ChatColor.RED + "/eb reload" + ChatColor.GRAY + ChatColor.ITALIC + " Reload changes in Bosses.yml");
 			break;
 		case 1:
 			p.sendMessage(s);
@@ -96,7 +96,7 @@ public class CommandsPlayer{
 			}
 			p.sendMessage(ChatColor.RED + "Current bosses: " + eb.BossList.size());
 			p.sendMessage(ChatColor.RED + "/eb spawn <BossName>" + ChatColor.GRAY + ChatColor.ITALIC + " Spawn Boss at your location");
-			p.sendMessage(ChatColor.RED + "/eb bossegg <BossName> (amount)" + ChatColor.GRAY + ChatColor.ITALIC + " getspawnegg");
+			p.sendMessage(ChatColor.RED + "/eb bossegg <BossName> (amount)" + ChatColor.GRAY + ChatColor.ITALIC + " get Bossegg");
 			break;
 
 		default:

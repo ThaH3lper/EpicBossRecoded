@@ -14,15 +14,20 @@ public class Despawn {
 	{
 		if(eb.BossList != null)
 		{
+			try
+			{
 			for(Boss boss : eb.BossList)
 			{
 				if(boss.getSaved() == false)
 				{
-					if(PlayersInside(boss.getLocation()) == false)
+					if(boss.getLocation() != null)
 					{
-						boss.setSaved(true);
-						boss.setSavedLocation(boss.getLocation());
-						boss.getLivingEntity().remove();
+						if(PlayersInside(boss.getLocation()) == false)
+						{
+							boss.setSaved(true);
+							boss.setSavedLocation(boss.getLocation());
+							boss.getLivingEntity().remove();
+						}
 					}
 				}
 				else if(boss.getSaved() == true)
@@ -40,13 +45,19 @@ public class Despawn {
 				{
 					if(PlayersInside(boss.getSavedLocation()) == true)
 					{
-						if(eb.bossCalculator.BossExist(boss) == false)
+						if(eb.bossCalculator.BossExist(boss) != null)
 						{
-							boss.setSaved(true);
-							boss.setSavedLocation(boss.getLocation());
+							if(eb.bossCalculator.BossExist(boss) == false)
+							{
+								boss.setSaved(true);
+								boss.setSavedLocation(boss.getLocation());
+							}
 						}
 					}
 				}
+			}
+			}
+			catch (Exception e) {
 			}
 		}
 	}
