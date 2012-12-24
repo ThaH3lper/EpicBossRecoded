@@ -85,7 +85,11 @@ public class DamageListener implements Listener{
 					Boss boss = eb.bossCalculator.getBoss(Hited);
 					boss.sethealth(boss.getHealth() - damage);
 					hited.setHealth(hited.getMaxHealth());
-					if(boss.getShowHp())
+					if(boss.getHealth() <= 0)
+					{
+						eb.damagemethods.deathBoss(boss);
+					}
+					else if(boss.getShowHp())
 					{
 						if(Damager instanceof Player)
 						{

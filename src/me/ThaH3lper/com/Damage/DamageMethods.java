@@ -1,15 +1,26 @@
 package me.ThaH3lper.com.Damage;
 
 import me.ThaH3lper.com.EpicBoss;
+import me.ThaH3lper.com.Boss.Boss;
 
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Fireball;
-import org.bukkit.entity.SmallFireball;
 
 public class DamageMethods {
 	private EpicBoss eb;
 	public DamageMethods(EpicBoss boss)
 	{
 		eb = boss;
+	}
+	public void deathBoss(Boss b)
+	{
+		if(b.getItems() != null)
+		{
+			for(String s:b.getItems())
+				eb.dropitems.dropItems(eb.loaditems.getItem(s), eb.loaditems.getItemChance(s), b.getLocation());
+		}
+		if(b.getLivingEntity() != null)
+		{
+			b.getLivingEntity().remove();
+		}
+		eb.BossList.remove(b);
 	}
 }

@@ -1,5 +1,7 @@
 package me.ThaH3lper.com.Boss;
 
+import java.util.List;
+
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 
@@ -13,9 +15,10 @@ public class Boss {
 	boolean showHp;
 	Location spawnlocation, savedlocation;
 	boolean saved = true;
+	List<String> Items;
 	
 	
-	public Boss(String newname, int newmaxhealth, Location newspawnlocation, String newentityspawnname, int newdamage, boolean newshowHP)
+	public Boss(String newname, int newmaxhealth, Location newspawnlocation, String newentityspawnname, int newdamage, boolean newshowHP, List<String> newItems)
 	{
 		name = newname;
 		MaxHealth = newmaxhealth;
@@ -25,6 +28,7 @@ public class Boss {
 		spawnlocation = newspawnlocation;
 		savedlocation = newspawnlocation;
 		entityspawnname = newentityspawnname;
+		Items = newItems;
 	}
 	public int getDamage()
 	{
@@ -111,6 +115,10 @@ public class Boss {
 	public boolean getSaved()
 	{
 		return saved;
+	}
+	public List<String> getItems()
+	{
+		return Items;
 	}
 	public String getEntitySpawnName()
 	{

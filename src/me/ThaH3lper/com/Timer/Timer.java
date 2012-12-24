@@ -5,7 +5,7 @@ import me.ThaH3lper.com.Timer.Spawn.Despawn;
 
 public class Timer {
 	
-	Despawn despawn = new Despawn();
+	public Despawn despawn = new Despawn();
 	private EpicBoss eb;
 	
 	@SuppressWarnings("deprecation")

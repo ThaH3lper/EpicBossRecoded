@@ -31,6 +31,7 @@ public class Despawn {
 					{
 						boss.setSaved(false);
 						LivingEntity l = (LivingEntity) eb.mobs.SpawnMob(boss.getEntitySpawnName(), boss.getSavedLocation());
+						l.setHealth(l.getMaxHealth() - 1);
 						boss.setEntity(l);
 					}
 				}

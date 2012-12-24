@@ -8,9 +8,14 @@ import me.ThaH3lper.com.Boss.Boss;
 import me.ThaH3lper.com.Boss.BossCalculations;
 import me.ThaH3lper.com.Commands.CommandsHandler;
 import me.ThaH3lper.com.Damage.DamageListener;
+import me.ThaH3lper.com.Damage.DamageMethods;
+import me.ThaH3lper.com.LoadBosses.DropItems;
 import me.ThaH3lper.com.LoadBosses.LoadBoss;
 import me.ThaH3lper.com.LoadBosses.LoadConfigs;
+import me.ThaH3lper.com.LoadBosses.LoadItems;
 import me.ThaH3lper.com.Timer.Timer;
+import me.ThaH3lper.com.egg.BossEgg;
+import me.ThaH3lper.com.egg.BossEggListener;
 
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -25,6 +30,10 @@ public class EpicBoss extends JavaPlugin{
 	public Timer timer;
 	public SaveLoad Bosses;
 	public LoadConfigs loadconfig;
+	public DropItems dropitems;
+	public LoadItems loaditems;
+	public DamageMethods damagemethods;
+	public BossEgg bossegg;
 	
 	//Important Stuff!
 	public List<Boss> BossList = new ArrayList<Boss>();
@@ -41,6 +50,7 @@ public class EpicBoss extends JavaPlugin{
 
 		PluginManager manager = this.getServer().getPluginManager();
 		manager.registerEvents(new DamageListener(this), this);
+		manager.registerEvents(new BossEggListener(this), this);
 		
 		PluginDescriptionFile pdfFile = this.getDescription();
 		this.logger.info("[EpicBoss-Recoded] " + pdfFile.getVersion() +  " Has Been Enabled!");
@@ -53,7 +63,9 @@ public class EpicBoss extends JavaPlugin{
 		timer = new Timer(this);
 		Bosses = new SaveLoad(this, "Bosses.yml");
 		loadconfig = new LoadConfigs(this);
-		
-
+		dropitems = new DropItems();
+		loaditems = new LoadItems();
+		damagemethods = new DamageMethods(this);
+		bossegg = new BossEgg(this);
 	}
 }
