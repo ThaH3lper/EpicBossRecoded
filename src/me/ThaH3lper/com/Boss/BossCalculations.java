@@ -37,9 +37,12 @@ public class BossCalculations {
 		{
 			for(Boss boss : eb.BossList)
 			{
-				if(id == boss.getId())
+				if(boss.getSaved() == false)
 				{
-					return boss;
+					if(id == boss.getId())
+					{
+						return boss;
+					}
 				}
 			}
 		}

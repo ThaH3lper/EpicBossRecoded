@@ -10,6 +10,10 @@ public class Swarm {
 	private EpicBoss eb;
 	Random r = new Random();
 	
+	//- swarm Type:Amount =HP Chance(float)
+    //- swarm zombie:3 <500 0.2
+    //- swarm pig:2 >500 0.1
+    
 	public Swarm(EpicBoss boss)
 	{
 		eb = boss;

@@ -97,6 +97,13 @@ public class Boss {
 		return entity.getLocation();
 	}
 	
+	public Location getWorkingLocation()
+	{
+		if(saved)
+			return savedlocation;
+		return entity.getLocation();
+	}
+	
 	public Location getSpawnLocation()
 	{
 		return spawnlocation;

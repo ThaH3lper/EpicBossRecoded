@@ -3,7 +3,11 @@ package me.ThaH3lper.com.LoadBosses;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+
 import me.ThaH3lper.com.EpicBoss;
+import me.ThaH3lper.com.Boss.Boss;
 
 public class LoadConfigs {
 	public EpicBoss eb;
@@ -56,5 +60,47 @@ public class LoadConfigs {
 			}
 		}
 		return null;
+	}
+	public void SaveAllBosses()
+	{
+		if(eb.BossList != null)
+		{
+			List<String> saved = new ArrayList<String>();
+			for(Boss boss : eb.BossList)
+			{
+				String save = boss.getName() + ":" + boss.getHealth() + ":" + boss.getWorkingLocation().getWorld().getName() + ":" + boss.getWorkingLocation().getBlockX() + ":" + boss.getWorkingLocation().getBlockY() + ":" + boss.getWorkingLocation().getBlockZ();
+				saved.add(save);
+				if(boss.getSaved() == false)
+				{
+					boss.getLivingEntity().remove();
+				}
+			}
+			eb.SavedData.reloadCustomConfig();
+			eb.SavedData.getCustomConfig().set("Bosses", saved);
+			eb.SavedData.saveCustomConfig();
+		}
+		
+	}
+	public void LoadAllBosses()
+	{
+		if(eb.SavedData.getCustomConfig().contains("Bosses"))
+		{
+			if(eb.SavedData.getCustomConfig().getStringList("Bosses") != null)
+			{
+				for(String s : eb.SavedData.getCustomConfig().getStringList("Bosses"))
+				{
+					String[] Splits = s.split(":");
+					if(getLoadBoss(Splits[0]) != null)
+					{
+						LoadBoss lb = getLoadBoss(Splits[0]);
+						Location l = new Location(Bukkit.getWorld(Splits[2]), (double )Integer.parseInt(Splits[3]), (double )Integer.parseInt(Splits[4]), (double )Integer.parseInt(Splits[5]));
+						
+						Boss bs = new Boss(lb.getName(), lb.getHealth(), l, lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems(), lb.getSkills());
+						bs.sethealth(Integer.parseInt(Splits[1]));
+						eb.BossList.add(bs);
+					}
+				}
+			}
+		}
 	}
 }

@@ -87,7 +87,10 @@ public class DamageListener implements Listener{
 					Boss boss = eb.bossCalculator.getBoss(Hited);
 					boss.sethealth(boss.getHealth() - damage);
 					hited.setHealth(hited.getMaxHealth());
-					eb.skillhandler.skills(boss);
+					if(Damager instanceof Player)
+					{
+						eb.skillhandler.skills(boss, (Player) Damager);
+					}
 					if(boss.getHealth() <= 0)
 					{
 						eb.damagemethods.deathBoss(boss);
@@ -110,19 +113,19 @@ public class DamageListener implements Listener{
 			}
 		}
 	}
-	/*@EventHandler(priority=EventPriority.HIGH)
+	@EventHandler(priority=EventPriority.HIGH)
 	  public void BossNoLose(EntityDamageEvent event)
 	{
 		if(event.getEntity() != null)
 		{
 			if(eb.bossCalculator.isBoss(event.getEntity())){
-				if(!(event.getCause() == DamageCause.ENTITY_ATTACK || event.getCause() == DamageCause.PROJECTILE))
+				if(!(event.getCause() == DamageCause.ENTITY_ATTACK || event.getCause() == DamageCause.PROJECTILE ||  event.getCause() == DamageCause.MAGIC))
 				{
 					event.setCancelled(true);
 				}
 			}
 		}
-	}*/
+	}
 	@EventHandler(priority=EventPriority.HIGH)
 	  public void BossNoFire(EntityCombustEvent e)
 	{	

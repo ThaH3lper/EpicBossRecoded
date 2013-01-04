@@ -26,11 +26,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class EpicBoss extends JavaPlugin{
 	
 	public final Logger logger = Logger.getLogger("Minecraft");
+	
 	//Constructor start
 	public BossCalculations bossCalculator;
 	public Mobs mobs;
 	public Timer timer;
-	public SaveLoad Bosses;
+	public SaveLoad Bosses, Options, SavedData;
 	public LoadConfigs loadconfig;
 	public DropItems dropitems;
 	public LoadItems loaditems;
@@ -45,6 +46,7 @@ public class EpicBoss extends JavaPlugin{
 	
 	@Override
 	public void onDisable() {
+		loadconfig.SaveAllBosses();
 		PluginDescriptionFile pdfFile = this.getDescription();
 		this.logger.info("[EpicBoss-Recoded] " + pdfFile.getVersion() +  " Has Been Disabled!");	
 		
@@ -66,6 +68,8 @@ public class EpicBoss extends JavaPlugin{
 		mobs = new Mobs();
 		timer = new Timer(this);
 		Bosses = new SaveLoad(this, "Bosses.yml");
+		Options = new SaveLoad(this, "Options.yml");
+		SavedData = new SaveLoad(this, "SavedData.yml");
 		loadconfig = new LoadConfigs(this);
 		dropitems = new DropItems();
 		loaditems = new LoadItems();
@@ -73,5 +77,7 @@ public class EpicBoss extends JavaPlugin{
 		bossegg = new BossEgg(this);
 		skillhandler = new SkillsHandler(this);
 		loadbossequip = new LoadBossEquip(this);
+		
+		loadconfig.LoadAllBosses();
 	}
 }

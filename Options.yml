@@ -1,0 +1,4 @@
+# --== Options for EpicBossRecoded ==--
+# When server is restarting should the bosses still be there?
+# Keep bosses when plugin reload
+KeepBossesOnReload: true

@@ -1,12 +1,15 @@
 Bosses:
   ZombieKing:
     Type: zombie
-    Health: 1000
+    Health: 250
     Showhp: true
     Damage: 10
     Skills: 
-    - swarm zombie:3 <500 0.2
-    - swarm pig:2 >500 0.1
+    - throw 20:0.5 >0 0.25
+    - swarm zombie:5 =200 1
+    - command say_I_will_find_you! =0 1
+    - command say_test_$player! >0 0.25
+    - bossmsg 10:&4$boss_&2I_will_fuck_you_$player >100 1
     SkillsInterval: 12
     Drops:
     - 264:0:20 1 $&2Diamonds!

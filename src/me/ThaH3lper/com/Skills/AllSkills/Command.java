@@ -2,35 +2,34 @@ package me.ThaH3lper.com.Skills.AllSkills;
 
 import java.util.Random;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 import me.ThaH3lper.com.EpicBoss;
 import me.ThaH3lper.com.Boss.Boss;
 
-public class Throw {
+public class Command {
 	private EpicBoss eb;
 	Random r = new Random();
 	
-	// - throw Radious:Strenght(float) <HP chance(float)
-	// - throw 20:0.2 =100 0.2
-	// - throw 18:0.8 >200 1
+	//- command &2I_Will_Kill_You! <500 0.2
 	
-	public Throw(EpicBoss boss)
+	public Command(EpicBoss boss)
 	{
 		eb = boss;
 	}
-	public void executeThrow(String s, Boss b, int index)
+	public void executeCommand(String s, Boss b, int index, Player p)
 	{
 		String[] parts = s.split(" ");
-		String[] settings = parts[1].split(":");
 		float chance = Float.parseFloat(parts[3]);
 		if(parts[2].contains(">"))
 		{
 			String exe = parts[2].replace(">", "");
 			if(b.getHealth() > Integer.parseInt(exe))
 			{
-				throwPlayer(Integer.parseInt(settings[0]), Float.parseFloat(settings[1]), chance, b);
+				sendCommand(parts[1], chance, p, b);
 			}
 		}
 		else if(parts[2].contains("="))
@@ -38,7 +37,7 @@ public class Throw {
 			String exe = parts[2].replace("=", "");
 			if(b.getHealth() <= Integer.parseInt(exe))
 			{
-				throwPlayer(Integer.parseInt(settings[0]), Float.parseFloat(settings[1]), chance, b);
+				sendCommand(parts[1], chance, p, b);
 				b.setRemoveSkill(index);
 			}
 		}
@@ -47,21 +46,19 @@ public class Throw {
 			String exe = parts[2].replace("<", "");
 			if(b.getHealth() < Integer.parseInt(exe))
 			{
-				throwPlayer(Integer.parseInt(settings[0]), Float.parseFloat(settings[1]), chance, b);
+				sendCommand(parts[1], chance, p, b);
 			}
 		}
 	}
-	public void throwPlayer(int radious, float strength, float chance, Boss b)
+	public void sendCommand(String s, float chance, Player p, Boss b)
 	{
 		if(r.nextFloat() <= chance)
 		{
-			if(eb.skillhandler.getPlayersRadious(radious, b) != null)
-			{
-				for(Player p : eb.skillhandler.getPlayersRadious(radious, b))
-				{
-					p.setVelocity(new Vector(0, strength, 0));
-				}
-			}
+			
+			s = s.replace("_", " ");
+			s = s.replace("$player", p.getName());
+			s = s.replace("$boss", b.getName());
+			Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), s);
 		}
 	}
 

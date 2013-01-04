@@ -10,12 +10,12 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class SaveLoad {
 	
-	public static FileConfiguration DataConfig = null;
-	public static File data = null;
+	private FileConfiguration DataConfig = null;
+	private File data = null;
 	
-	public EpicBoss eb;
-	public String file;
-	public File thefile;
+	private EpicBoss eb;
+	private String file;
+	private File thefile;
 	
 	public SaveLoad(EpicBoss boss, String newfile)
 	{
@@ -41,6 +41,7 @@ public class SaveLoad {
 	    		DataConfig.setDefaults(defConfig);
 	    	}
 	    	getCustomConfig().options().copyDefaults(true);
+	    	eb.logger.info(file + " did not exict! Generated a new one!");
 	    }
 	    else
 	    {
