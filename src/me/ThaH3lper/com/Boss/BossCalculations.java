@@ -19,9 +19,12 @@ public class BossCalculations {
 		{
 			for(Boss boss : eb.BossList)
 			{
-				if(e.getEntityId() == boss.getId())
+				if(boss.getLivingEntity() != null)
 				{
-					return true;
+					if(e.getEntityId() == boss.getId())
+					{
+						return true;
+					}
 				}
 			}
 		}

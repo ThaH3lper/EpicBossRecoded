@@ -6,7 +6,6 @@ import me.ThaH3lper.com.EpicBoss;
 import me.ThaH3lper.com.Boss.Boss;
 import me.ThaH3lper.com.LoadBosses.LoadBoss;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -62,7 +61,7 @@ public class BossEggListener implements Listener{
 					        eb.getServer().getScheduler().scheduleSyncDelayedTask(eb, new Runnable() {
 
 					        	   public void run() {
-									eb.BossList.add(new Boss(lb.getName(), lb.getHealth(), item.getLocation(), lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems()));
+									eb.BossList.add(new Boss(lb.getName(), lb.getHealth(), item.getLocation(), lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems(), lb.getSkills()));
 										
 									//Call despawner/spawner for instant spawn!
 									eb.timer.despawn.DeSpawnEvent(eb);

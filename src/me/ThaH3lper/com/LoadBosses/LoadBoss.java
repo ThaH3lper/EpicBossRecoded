@@ -1,5 +1,6 @@
 package me.ThaH3lper.com.LoadBosses;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoadBoss {
@@ -9,15 +10,17 @@ public class LoadBoss {
 	public int Damage;
 	boolean Showhp;
 	public List<String> Items;
+	public List<String> Skillslist;
 	
-	public LoadBoss(String newName, String newType, int newHealth, int newDamage, List<String> newItems, boolean newShowhp)
+	public LoadBoss(String newName, String newType, int newHealth, int newDamage, List<String> newItems, boolean newShowhp, List<String> newskills)
 	{
 		Name = newName;
 		Type = newType;
 		Health = newHealth;
 		Damage = newDamage;
-		Items = newItems;
+		Items = new ArrayList<String>(newItems);
 		Showhp = newShowhp;
+		Skillslist = new ArrayList<String>(newskills);
 	}
 	public String getName()
 	{
@@ -38,6 +41,10 @@ public class LoadBoss {
 	public List<String> getItems()
 	{
 		return Items;
+	}
+	public List<String> getSkills()
+	{
+		return Skillslist;
 	}
 	public boolean getShowhp()
 	{

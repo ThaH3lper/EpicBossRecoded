@@ -1,17 +1,12 @@
 Bosses:
   ZombieKing:
     Type: zombie
-    Health: 200
+    Health: 1000
     Showhp: true
     Damage: 10
     Skills: 
-    - jump
-    - speed_1
-    - teleport
-    - lightning
-    - blindness_short
-    - zombie_swarm_small
-    - effectfire
+    - swarm zombie:3 <500 0.2
+    - swarm pig:2 >500 0.1
     SkillsInterval: 12
     Drops:
     - 264:0:20 1 $&2Diamonds!

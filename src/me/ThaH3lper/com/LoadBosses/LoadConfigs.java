@@ -1,16 +1,12 @@
 package me.ThaH3lper.com.LoadBosses;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import me.ThaH3lper.com.EpicBoss;
 
 public class LoadConfigs {
 	public EpicBoss eb;
-	
-	private String Name, Type;
-	private int Health, Damage;
-	private List<String> Items;
-	private boolean showhp;
 	public LoadConfigs(EpicBoss boss)
 	{
 		eb = boss;
@@ -24,6 +20,11 @@ public class LoadConfigs {
 		{
 			for(String name : eb.Bosses.getCustomConfig().getConfigurationSection("Bosses").getKeys(false))
 			{
+				String Name, Type;
+				int Health, Damage;
+				List<String> Items = new ArrayList<String>(), Skills = new ArrayList<String>();
+				boolean showhp;
+				
 				Name = name;
 				Type = eb.Bosses.getCustomConfig().getString("Bosses." + name + ".Type");
 				Health = eb.Bosses.getCustomConfig().getInt("Bosses." + name + ".Health");
@@ -32,9 +33,13 @@ public class LoadConfigs {
 				{
 					Items = eb.Bosses.getCustomConfig().getStringList("Bosses." + name + ".Drops");
 				}
+				if(eb.Bosses.getCustomConfig().contains("Bosses." + name + ".Skills") == true)
+				{
+					Skills = eb.Bosses.getCustomConfig().getStringList("Bosses." + name + ".Skills");
+				}
 				showhp = eb.Bosses.getCustomConfig().getBoolean("Bosses." + name + ".Showhp");
 				
-				eb.BossLoadList.add(new LoadBoss(Name, Type, Health, Damage, Items, showhp));
+				eb.BossLoadList.add(new LoadBoss(Name, Type, Health, Damage, Items, showhp, Skills));
 			}
 		}
 	}

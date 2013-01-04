@@ -38,6 +38,7 @@ public class Despawn {
 						LivingEntity l = (LivingEntity) eb.mobs.SpawnMob(boss.getEntitySpawnName(), boss.getSavedLocation());
 						l.setHealth(l.getMaxHealth() - 1);
 						boss.setEntity(l);
+						
 					}
 				}
 				//This is used so if it gets removed it will be spawned again!

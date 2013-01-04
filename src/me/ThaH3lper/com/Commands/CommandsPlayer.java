@@ -3,7 +3,6 @@ package me.ThaH3lper.com.Commands;
 import me.ThaH3lper.com.EpicBoss;
 import me.ThaH3lper.com.Boss.Boss;
 import me.ThaH3lper.com.LoadBosses.LoadBoss;
-import me.ThaH3lper.com.LoadBosses.LoadConfigs;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -50,7 +49,7 @@ public class CommandsPlayer{
 				if(lb != null)
 				{
 					p.sendMessage(ChatColor.GREEN + "You spawned " + ChatColor.DARK_PURPLE + lb.getName() + ChatColor.GREEN + " and he has " + ChatColor.DARK_PURPLE + lb.getHealth() + ChatColor.GREEN + " Hp");
-					eb.BossList.add(new Boss(lb.getName(), lb.getHealth(), p.getLocation(), lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems()));
+					eb.BossList.add(new Boss(lb.getName(), lb.getHealth(), p.getLocation(), lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems(), lb.getSkills()));
 					
 					//Call despawner/spawner for instant spawn!
 					eb.timer.despawn.DeSpawnEvent(eb);
@@ -77,6 +76,20 @@ public class CommandsPlayer{
 			p.sendMessage(s);
 			p.sendMessage(ChatColor.RED + "/eb help bossinfo" + ChatColor.GRAY + ChatColor.ITALIC + " Show info about Bosses");
 			p.sendMessage(ChatColor.RED + "/eb reload" + ChatColor.GRAY + ChatColor.ITALIC + " Reload changes in Bosses.yml");
+			for(LoadBoss lb : eb.BossLoadList)
+			{
+				for(String s: lb.getSkills())
+				{
+					Bukkit.broadcastMessage(s);
+				}
+			}
+			for(Boss b : eb.BossList)
+			{
+				for(String s: b.getSkill())
+				{
+					Bukkit.broadcastMessage(ChatColor.GOLD + s);
+				}
+			}
 			break;
 		case 1:
 			p.sendMessage(s);

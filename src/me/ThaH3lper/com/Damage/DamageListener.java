@@ -3,6 +3,7 @@ package me.ThaH3lper.com.Damage;
 import me.ThaH3lper.com.EpicBoss;
 import me.ThaH3lper.com.Boss.Boss;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Egg;
@@ -16,6 +17,7 @@ import org.bukkit.entity.ThrownPotion;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -85,6 +87,7 @@ public class DamageListener implements Listener{
 					Boss boss = eb.bossCalculator.getBoss(Hited);
 					boss.sethealth(boss.getHealth() - damage);
 					hited.setHealth(hited.getMaxHealth());
+					eb.skillhandler.skills(boss);
 					if(boss.getHealth() <= 0)
 					{
 						eb.damagemethods.deathBoss(boss);
@@ -100,16 +103,33 @@ public class DamageListener implements Listener{
 					}
 				}
 			}
-		}
-	}
-	@EventHandler(priority=EventPriority.HIGH)
-	  public void BossNoLose(EntityDamageEvent event)
-	{
-		if(eb.bossCalculator.isBoss(event.getEntity())){
-			if(!(event.getCause() == DamageCause.ENTITY_ATTACK || event.getCause() == DamageCause.PROJECTILE))
+			else if(eb.bossCalculator.isBoss(Damager))
 			{
-				event.setCancelled(true);
+				Boss boss = eb.bossCalculator.getBoss(Damager);
+				e.setDamage(boss.getDamage());
 			}
 		}
 	}
+	/*@EventHandler(priority=EventPriority.HIGH)
+	  public void BossNoLose(EntityDamageEvent event)
+	{
+		if(event.getEntity() != null)
+		{
+			if(eb.bossCalculator.isBoss(event.getEntity())){
+				if(!(event.getCause() == DamageCause.ENTITY_ATTACK || event.getCause() == DamageCause.PROJECTILE))
+				{
+					event.setCancelled(true);
+				}
+			}
+		}
+	}*/
+	@EventHandler(priority=EventPriority.HIGH)
+	  public void BossNoFire(EntityCombustEvent e)
+	{	
+		if(eb.bossCalculator.isBoss(e.getEntity()))
+		{
+			e.setCancelled(true);
+		}
+	}
+	
 }

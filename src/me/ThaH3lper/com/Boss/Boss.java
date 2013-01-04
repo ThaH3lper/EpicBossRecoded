@@ -1,5 +1,6 @@
 package me.ThaH3lper.com.Boss;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Location;
@@ -7,18 +8,18 @@ import org.bukkit.entity.LivingEntity;
 
 public class Boss {
 	
-	String name, entityspawnname;
-	int MaxHealth;
-	int Health;
-	LivingEntity entity;
-	int damage;
-	boolean showHp;
-	Location spawnlocation, savedlocation;
-	boolean saved = true;
-	List<String> Items;
+	private String name, entityspawnname;
+	private int MaxHealth;
+	private int Health;
+	private LivingEntity entity;
+	private int damage;
+	private boolean showHp;
+	private Location spawnlocation, savedlocation;
+	private boolean saved = true;
+	private List<String> Items, Skills;
 	
 	
-	public Boss(String newname, int newmaxhealth, Location newspawnlocation, String newentityspawnname, int newdamage, boolean newshowHP, List<String> newItems)
+	public Boss(String newname, int newmaxhealth, Location newspawnlocation, String newentityspawnname, int newdamage, boolean newshowHP, List<String> newItems, List<String> newSkills)
 	{
 		name = newname;
 		MaxHealth = newmaxhealth;
@@ -28,7 +29,8 @@ public class Boss {
 		spawnlocation = newspawnlocation;
 		savedlocation = newspawnlocation;
 		entityspawnname = newentityspawnname;
-		Items = newItems;
+		Items = new ArrayList<String>(newItems);
+		Skills = new ArrayList<String>(newSkills);
 	}
 	public int getDamage()
 	{
@@ -119,6 +121,14 @@ public class Boss {
 	public List<String> getItems()
 	{
 		return Items;
+	}
+	public List<String> getSkill()
+	{
+		return Skills;
+	}
+	public void setRemoveSkill(int i)
+	{
+		Skills.set(i, "null");
 	}
 	public String getEntitySpawnName()
 	{

@@ -11,8 +11,10 @@ import me.ThaH3lper.com.Damage.DamageListener;
 import me.ThaH3lper.com.Damage.DamageMethods;
 import me.ThaH3lper.com.LoadBosses.DropItems;
 import me.ThaH3lper.com.LoadBosses.LoadBoss;
+import me.ThaH3lper.com.LoadBosses.LoadBossEquip;
 import me.ThaH3lper.com.LoadBosses.LoadConfigs;
 import me.ThaH3lper.com.LoadBosses.LoadItems;
+import me.ThaH3lper.com.Skills.SkillsHandler;
 import me.ThaH3lper.com.Timer.Timer;
 import me.ThaH3lper.com.egg.BossEgg;
 import me.ThaH3lper.com.egg.BossEggListener;
@@ -34,6 +36,8 @@ public class EpicBoss extends JavaPlugin{
 	public LoadItems loaditems;
 	public DamageMethods damagemethods;
 	public BossEgg bossegg;
+	public SkillsHandler skillhandler;
+	public LoadBossEquip loadbossequip;
 	
 	//Important Stuff!
 	public List<Boss> BossList = new ArrayList<Boss>();
@@ -67,5 +71,7 @@ public class EpicBoss extends JavaPlugin{
 		loaditems = new LoadItems();
 		damagemethods = new DamageMethods(this);
 		bossegg = new BossEgg(this);
+		skillhandler = new SkillsHandler(this);
+		loadbossequip = new LoadBossEquip(this);
 	}
 }

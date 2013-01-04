@@ -1,6 +1,5 @@
 package me.ThaH3lper.com.LoadBosses;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
