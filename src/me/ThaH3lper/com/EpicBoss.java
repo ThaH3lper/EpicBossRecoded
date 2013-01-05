@@ -16,6 +16,8 @@ import me.ThaH3lper.com.LoadBosses.LoadConfigs;
 import me.ThaH3lper.com.LoadBosses.LoadItems;
 import me.ThaH3lper.com.Skills.SkillsHandler;
 import me.ThaH3lper.com.Timer.Timer;
+import me.ThaH3lper.com.Timer.TimerSeconds;
+import me.ThaH3lper.com.Timer.TimerStuff;
 import me.ThaH3lper.com.egg.BossEgg;
 import me.ThaH3lper.com.egg.BossEggListener;
 import me.ThaH3lper.locations.LocationStuff;
@@ -32,7 +34,7 @@ public class EpicBoss extends JavaPlugin{
 	//Constructor start
 	public BossCalculations bossCalculator;
 	public Mobs mobs;
-	public Timer timer;
+	public TimerSeconds timer;
 	public SaveLoad Bosses, Options, SavedData;
 	public LoadConfigs loadconfig;
 	public DropItems dropitems;
@@ -42,11 +44,13 @@ public class EpicBoss extends JavaPlugin{
 	public SkillsHandler skillhandler;
 	public LoadBossEquip loadbossequip;
 	public LocationStuff locationstuff;
+	public TimerStuff timerstuff;
 	
 	//Important Stuff!
 	public List<Boss> BossList = new ArrayList<Boss>();
 	public List<LoadBoss> BossLoadList = new ArrayList<LoadBoss>();
 	public List<Locations> LocationList = new ArrayList<Locations>();
+	public List<Timer> TimersList = new ArrayList<Timer>();
 	
 	@Override
 	public void onDisable() {
@@ -70,7 +74,6 @@ public class EpicBoss extends JavaPlugin{
 		//Constructor Give Info
 		bossCalculator = new BossCalculations(this);
 		mobs = new Mobs();
-		timer = new Timer(this);
 		Bosses = new SaveLoad(this, "Bosses.yml");
 		Options = new SaveLoad(this, "Options.yml");
 		SavedData = new SaveLoad(this, "SavedData.yml");
@@ -82,6 +85,8 @@ public class EpicBoss extends JavaPlugin{
 		skillhandler = new SkillsHandler(this);
 		loadbossequip = new LoadBossEquip(this);
 		locationstuff = new LocationStuff(this);
+		timerstuff = new TimerStuff(this);
+		timer = new TimerSeconds(this);
 		
 		loadconfig.LoadAllBosses();
 	}

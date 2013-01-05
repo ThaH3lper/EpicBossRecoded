@@ -68,8 +68,11 @@ public class LoadConfigs {
 			List<String> saved = new ArrayList<String>();
 			for(Boss boss : eb.BossList)
 			{
-				String save = boss.getName() + ":" + boss.getHealth() + ":" + boss.getWorkingLocation().getWorld().getName() + ":" + boss.getWorkingLocation().getBlockX() + ":" + boss.getWorkingLocation().getBlockY() + ":" + boss.getWorkingLocation().getBlockZ();
-				saved.add(save);
+				if(boss.getTimer().equals("null"))
+				{
+					String save = boss.getName() + ":" + boss.getHealth() + ":" + boss.getWorkingLocation().getWorld().getName() + ":" + boss.getWorkingLocation().getBlockX() + ":" + boss.getWorkingLocation().getBlockY() + ":" + boss.getWorkingLocation().getBlockZ() + ":" + boss.getTimer();
+					saved.add(save);
+				}
 				if(boss.getSaved() == false)
 				{
 					boss.getLivingEntity().remove();
@@ -97,6 +100,10 @@ public class LoadConfigs {
 						
 						Boss bs = new Boss(lb.getName(), lb.getHealth(), l, lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems(), lb.getSkills());
 						bs.sethealth(Integer.parseInt(Splits[1]));
+						if(!Splits[6].equals("null"));
+						{
+							bs.setTimer(Splits[6]);
+						}
 						eb.BossList.add(bs);
 					}
 				}

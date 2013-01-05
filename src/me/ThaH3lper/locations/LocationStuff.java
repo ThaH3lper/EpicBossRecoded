@@ -32,6 +32,7 @@ public class LocationStuff {
 				if(eb.LocationList.get(i).getName().equals(name))
 				{
 					eb.LocationList.remove(i);
+					saveLocation();
 				}
 				i++;
 			}

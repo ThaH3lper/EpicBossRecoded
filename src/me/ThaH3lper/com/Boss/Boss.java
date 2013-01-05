@@ -8,7 +8,7 @@ import org.bukkit.entity.LivingEntity;
 
 public class Boss {
 	
-	private String name, entityspawnname;
+	private String name, entityspawnname, Timer;
 	private int MaxHealth;
 	private int Health;
 	private LivingEntity entity;
@@ -31,6 +31,7 @@ public class Boss {
 		entityspawnname = newentityspawnname;
 		Items = new ArrayList<String>(newItems);
 		Skills = new ArrayList<String>(newSkills);
+		Timer = "null";
 	}
 	public int getDamage()
 	{
@@ -140,6 +141,14 @@ public class Boss {
 	public String getEntitySpawnName()
 	{
 		return entityspawnname;
+	}
+	public void setTimer(String name)
+	{
+		Timer = name;
+	}
+	public String getTimer()
+	{
+		return Timer;
 	}
 
 }

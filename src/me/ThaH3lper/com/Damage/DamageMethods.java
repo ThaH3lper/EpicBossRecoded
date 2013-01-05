@@ -12,6 +12,7 @@ public class DamageMethods {
 	}
 	public void deathBoss(Boss b)
 	{
+		eb.timerstuff.Death(b);
 		if(b.getItems() != null)
 		{
 			for(String s:b.getItems())
