@@ -18,6 +18,8 @@ import me.ThaH3lper.com.Skills.SkillsHandler;
 import me.ThaH3lper.com.Timer.Timer;
 import me.ThaH3lper.com.egg.BossEgg;
 import me.ThaH3lper.com.egg.BossEggListener;
+import me.ThaH3lper.locations.LocationStuff;
+import me.ThaH3lper.locations.Locations;
 
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -39,10 +41,12 @@ public class EpicBoss extends JavaPlugin{
 	public BossEgg bossegg;
 	public SkillsHandler skillhandler;
 	public LoadBossEquip loadbossequip;
+	public LocationStuff locationstuff;
 	
 	//Important Stuff!
 	public List<Boss> BossList = new ArrayList<Boss>();
 	public List<LoadBoss> BossLoadList = new ArrayList<LoadBoss>();
+	public List<Locations> LocationList = new ArrayList<Locations>();
 	
 	@Override
 	public void onDisable() {
@@ -77,6 +81,7 @@ public class EpicBoss extends JavaPlugin{
 		bossegg = new BossEgg(this);
 		skillhandler = new SkillsHandler(this);
 		loadbossequip = new LoadBossEquip(this);
+		locationstuff = new LocationStuff(this);
 		
 		loadconfig.LoadAllBosses();
 	}
