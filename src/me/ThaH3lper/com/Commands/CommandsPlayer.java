@@ -44,24 +44,39 @@ public class CommandsPlayer{
 		{
 			if(args[0].equals("reload"))
 			{
-				eb.loadconfig.LoadBosses();
-				p.sendMessage(ChatColor.GREEN + "EpicBoss reloded!");
+				if(p.hasPermission("epicboss.reload"))
+				{
+					eb.loadconfig.LoadBosses();
+					p.sendMessage(ChatColor.GREEN + "EpicBoss reloded!");
+				}
 			}
 			else if(args[0].equals("boss"))
 			{
-				bosses.Command(p, cmd, commandlabel, args);
+				if(p.hasPermission("epicboss.boss"))
+				{
+					bosses.Command(p, cmd, commandlabel, args);
+				}
 			}
 			else if(args[0].equals("bossegg"))
 			{
-				bossegg.Command(p, cmd, commandlabel, args);
+				if(p.hasPermission("epicboss.bossegg"))
+				{
+					bossegg.Command(p, cmd, commandlabel, args);
+				}
 			}
 			else if(args[0].equals("timers"))
 			{
-				timer.Command(p, cmd, commandlabel, args);
+				if(p.hasPermission("epicboss.timers"))
+				{
+					timer.Command(p, cmd, commandlabel, args);
+				}
 			}
 			else if(args[0].equals("location"))
 			{
-				location.Command(p, cmd, commandlabel, args);
+				if(p.hasPermission("epicboss.location"))
+				{
+					location.Command(p, cmd, commandlabel, args);
+				}
 			}
 			else
 			{

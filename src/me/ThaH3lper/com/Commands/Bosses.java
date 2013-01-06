@@ -1,5 +1,8 @@
 package me.ThaH3lper.com.Commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import me.ThaH3lper.com.EpicBoss;
 import me.ThaH3lper.com.Boss.Boss;
 import me.ThaH3lper.com.LoadBosses.LoadBoss;
@@ -37,6 +40,33 @@ public class Bosses {
 			}
 			p.sendMessage(ChatColor.RED + "Current bosses: " + eb.BossList.size());
 			p.sendMessage(ChatColor.RED + "/eb boss spawn <BossName> (location)" + ChatColor.GRAY + ChatColor.ITALIC + " Spawn a Boss");
+			p.sendMessage(ChatColor.RED + "/eb boss killall " + ChatColor.GRAY + ChatColor.ITALIC + " kills all bosses (Not timered bosses)");
+		}
+		if(args.length == 2)
+		{
+			if(args[1].equals("killall"))
+			{
+			if(eb.BossList != null)
+			{
+				List<Boss> remove = new ArrayList<Boss>();
+				int i = 0;
+				while(i < eb.BossList.size())
+				{
+					if(eb.BossList.get(i).getTimer().equals("null"))
+					{
+						remove.add(eb.BossList.get(i));
+					}					
+					i++;
+				}
+				for(Boss b: remove)
+				{
+					if(b.getLivingEntity() != null)
+						b.getLivingEntity().remove();
+				}
+				eb.BossList.removeAll(remove);
+				p.sendMessage(ChatColor.GREEN + "All Bosses removed!");
+			}
+			}
 		}
 		if(args.length == 3)
 		{
@@ -51,6 +81,37 @@ public class Bosses {
 					
 					eb.timer.despawn.DeSpawnEvent(eb);
 				}
+			}
+			if(args[1].equals("killtype"))
+			{
+			if(eb.BossList != null)
+			{
+				List<Boss> remove = new ArrayList<Boss>();
+				int i = 0;
+				if(eb.loadconfig.getLoadBoss(args[2]) != null)
+				{
+				while(i < eb.BossList.size())
+				{
+					if(eb.BossList.get(i).getTimer().equals("null"))
+					{
+						if(eb.BossList.get(i).getName().equals(args[2]))
+							remove.add(eb.BossList.get(i));
+					}					
+					i++;
+				}
+				for(Boss b: remove)
+				{
+					if(b.getLivingEntity() != null)
+						b.getLivingEntity().remove();
+				}
+				eb.BossList.removeAll(remove);
+				p.sendMessage(ChatColor.GREEN + "All " + ChatColor.DARK_PURPLE + args[2] + ChatColor.GREEN + " removed!");
+				}
+				else
+				{
+					p.sendMessage(ChatColor.RED + "There is no boss called " + args[2]);
+				}
+			}
 			}
 		}
 		if(args.length == 4)

@@ -1,16 +1,19 @@
 Bosses:
   ZombieKing:
     Type: zombie
-    Health: 250
+    Health: 400
     Showhp: true
     Damage: 10
     Skills: 
-    - throw 20:0.5 >0 0.25
-    - swarm zombie:5 =200 1
-    - command say_I_will_find_you! =0 1
-    - command say_test_$player! >0 0.25
-    - bossmsg 10:&4$boss_&2I_will_fuck_you_$player >100 1
-    SkillsInterval: 12
+    - throw 20:2 >0 0.15
+    - swarm pig:3 =300 1
+    - command say_Boss_has_300_hp! =300 1
+    - potion 20:POISON:10:2 =200 1
+    - bossmsg 20:&4$boss_&2I_Warned_YOU! =200 1
+    - potion 20:SPEED:10:1 =100 1
+    - bossmsg 20:&4$boss_&2Ohhh_I_used_wrong_skill! =100 1
+    - bossmsg 25:&3$player_killed_$boss =0 1
+    - command say_Good_Job! =0 1
     Drops:
     - 264:0:20 1 $&2Diamonds!
     - 35:14:16 1

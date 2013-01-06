@@ -14,6 +14,16 @@ import org.bukkit.entity.Skeleton.SkeletonType;
 public class Mobs {
 	public Entity SpawnMob(String mobname, Location l)
 	{
+		if(mobname.equals("wither"))
+		{
+			Entity liver = l.getWorld().spawnEntity(l, EntityType.WITHER);
+			return liver;
+		}
+		if(mobname.equals("enderdragon"))
+		{
+			Entity liver = l.getWorld().spawnEntity(l, EntityType.ENDER_DRAGON);
+			return liver;
+		}
 		if(mobname.equals("witherskeleton"))
 		{
 			Entity liver = l.getWorld().spawnEntity(l, EntityType.SKELETON);

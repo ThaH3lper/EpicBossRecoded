@@ -8,6 +8,9 @@ import me.ThaH3lper.com.EpicBoss;
 import me.ThaH3lper.com.Boss.Boss;
 import me.ThaH3lper.com.Skills.AllSkills.Bossmsg;
 import me.ThaH3lper.com.Skills.AllSkills.Command;
+import me.ThaH3lper.com.Skills.AllSkills.Lightning;
+import me.ThaH3lper.com.Skills.AllSkills.PotionBoss;
+import me.ThaH3lper.com.Skills.AllSkills.Potions;
 import me.ThaH3lper.com.Skills.AllSkills.Swarm;
 import me.ThaH3lper.com.Skills.AllSkills.Throw;
 
@@ -20,6 +23,9 @@ public class SkillsHandler {
 	public Throw throwplayer;
 	public Command command;
 	public Bossmsg bossmsg;
+	public Potions potions;
+	public PotionBoss potionboss;
+	public Lightning lightning;
 	
 	//Constructors
 	
@@ -30,6 +36,9 @@ public class SkillsHandler {
 		throwplayer = new Throw(eb);
 		command = new Command(eb);
 		bossmsg = new Bossmsg(eb);
+		potions = new Potions(eb);
+		potionboss = new PotionBoss(eb);
+		lightning = new Lightning(eb);
 		
 	}
 	public void skills(Boss b, Player p)
@@ -57,6 +66,18 @@ public class SkillsHandler {
 				{
 					bossmsg.executeMsg(s, b, index, p);
 				}
+				if(parts[0].equals("potion"))
+				{
+					potions.executePotions(s, b, index);
+				}
+				if(parts[0].equals("potionboss"))
+				{
+					potionboss.executeBossPotions(s, b, index);
+				}
+				if(parts[0].equals("lightning"))
+				{
+					lightning.executeLightning(s, b, index);
+				}
 				index++;
 			}
 		}
@@ -66,9 +87,12 @@ public class SkillsHandler {
 		List<Player> playerlist = new ArrayList<Player>();
 		for(Player p: Bukkit.getOnlinePlayers())
 		{
-			if(b.getLocation().distance(p.getLocation()) < radious)
+			if(b.getLocation().getWorld() == p.getLocation().getWorld())
 			{
-				playerlist.add(p);
+				if(b.getLocation().distance(p.getLocation()) < radious)
+				{
+					playerlist.add(p);
+				}
 			}
 		}
 		return playerlist;
