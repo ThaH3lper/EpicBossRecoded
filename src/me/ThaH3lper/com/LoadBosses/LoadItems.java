@@ -3,6 +3,8 @@ package me.ThaH3lper.com.LoadBosses;
 import org.bukkit.ChatColor;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class LoadItems {
 	public ItemStack getItem(String s)
@@ -20,6 +22,7 @@ public class LoadItems {
 		
 		//Create a Itemstack
 		ItemStack stack = new ItemStack(id, amount, (short) data2);
+		ItemMeta em = stack.getItemMeta();
 		
 		//ThirdPart if it exicts
 		if(parts.length >= 3)
@@ -32,10 +35,19 @@ public class LoadItems {
 					String[] EnchantsParts = enc.split(":");
 					int level = Integer.parseInt(EnchantsParts[1]);
 					Enchantment enchantment = Enchantment.getByName(EnchantsParts[0]);
-					stack.addEnchantment(enchantment, level);
+					if(id == 403)
+					{
+						stack = addBookEnchantment(stack, enchantment, level);
+					}
+					else
+					{
+						em.addEnchant(enchantment, level, true);
+					}
 				}
 			}
 		}
+		if(id != 403)
+			stack.setItemMeta(em);
 		return stack;
 	}
 	public float getItemChance(String s)
@@ -71,4 +83,10 @@ public class LoadItems {
 		}
 		return null;
 	}
+	public ItemStack addBookEnchantment(ItemStack item, Enchantment enchantment, int level){
+        EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item.getItemMeta();
+        meta.addStoredEnchant(enchantment, level, true);
+        item.setItemMeta(meta);
+        return item;
+    }
 }

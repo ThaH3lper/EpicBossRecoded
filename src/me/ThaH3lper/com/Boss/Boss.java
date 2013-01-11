@@ -17,6 +17,7 @@ public class Boss {
 	private Location spawnlocation, savedlocation;
 	private boolean saved = true;
 	private List<String> Items, Skills;
+	private List<Integer> percent;
 	
 	
 	public Boss(String newname, int newmaxhealth, Location newspawnlocation, String newentityspawnname, int newdamage, boolean newshowHP, List<String> newItems, List<String> newSkills)
@@ -31,6 +32,7 @@ public class Boss {
 		entityspawnname = newentityspawnname;
 		Items = new ArrayList<String>(newItems);
 		Skills = new ArrayList<String>(newSkills);
+		percent = new ArrayList<Integer>();
 		Timer = "null";
 	}
 	public int getDamage()
@@ -67,6 +69,19 @@ public class Boss {
 	public void sethealth(int i)
 	{
 		Health = i;
+	}
+	
+	public void addPercent(int i)
+	{
+		percent.add(i);
+	}
+	public boolean hasPercent(int i)
+	{
+		if(percent.contains(i))
+		{
+			return true;
+		}
+		return false;
 	}
 	
 	public String getName()

@@ -1,4 +1,8 @@
 # --== Options for EpicBossRecoded ==--
-# When server is restarting should the bosses still be there?
-# Keep bosses when plugin reload
-KeepBossesOnReload: true
+# -----------------------------
+# Here is the message when you hit the boss
+# [EpicBoss], change this to your own text :)
+BossTitle: '&7[&4EpicBoss&7] '
+# Do you want the health of the boss in percentage every 10%
+# true = Percentage, false = show current health on every hit
+percentage: false

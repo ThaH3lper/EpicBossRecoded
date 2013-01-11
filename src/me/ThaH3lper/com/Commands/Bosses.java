@@ -40,7 +40,8 @@ public class Bosses {
 			}
 			p.sendMessage(ChatColor.RED + "Current bosses: " + eb.BossList.size());
 			p.sendMessage(ChatColor.RED + "/eb boss spawn <BossName> (location)" + ChatColor.GRAY + ChatColor.ITALIC + " Spawn a Boss");
-			p.sendMessage(ChatColor.RED + "/eb boss killall " + ChatColor.GRAY + ChatColor.ITALIC + " kills all bosses (Not timered bosses)");
+			p.sendMessage(ChatColor.RED + "/eb boss killall " + ChatColor.GRAY + ChatColor.ITALIC + " kills all bosses");
+			p.sendMessage(ChatColor.RED + "/eb boss killtype <BossName " + ChatColor.GRAY + ChatColor.ITALIC + " kills all bosses with that name");
 		}
 		if(args.length == 2)
 		{

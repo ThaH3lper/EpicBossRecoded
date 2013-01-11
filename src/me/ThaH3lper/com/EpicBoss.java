@@ -23,6 +23,7 @@ import me.ThaH3lper.com.egg.BossEggListener;
 import me.ThaH3lper.locations.LocationStuff;
 import me.ThaH3lper.locations.Locations;
 
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -45,6 +46,9 @@ public class EpicBoss extends JavaPlugin{
 	public LoadBossEquip loadbossequip;
 	public LocationStuff locationstuff;
 	public TimerStuff timerstuff;
+	
+	public String name;
+	public boolean percentage;
 	
 	//Important Stuff!
 	public List<Boss> BossList = new ArrayList<Boss>();
@@ -87,6 +91,11 @@ public class EpicBoss extends JavaPlugin{
 		locationstuff = new LocationStuff(this);
 		timerstuff = new TimerStuff(this);
 		timer = new TimerSeconds(this);
+		
+		name = Options.getCustomConfig().getString("BossTitle");
+		name = ChatColor.translateAlternateColorCodes('&', name);
+		
+		percentage = Options.getCustomConfig().getBoolean("percentage");
 		
 		loadconfig.LoadAllBosses();
 	}

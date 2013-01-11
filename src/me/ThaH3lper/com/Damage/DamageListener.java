@@ -21,6 +21,7 @@ import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.yaml.snakeyaml.external.com.google.gdata.util.common.base.PercentEscaper;
 
 public class DamageListener implements Listener{
 	private EpicBoss eb;
@@ -100,8 +101,24 @@ public class DamageListener implements Listener{
 						if(Damager instanceof Player)
 						{
 							Player p = (Player) Damager;
-							String s = ChatColor.RED + boss.getName() + ChatColor.GRAY + " [" +ChatColor.DARK_RED + boss.getHealth() + ChatColor.GRAY + "/" + ChatColor.DARK_RED + boss.getMaxHealth() + ChatColor.GRAY + "]";
-							p.sendMessage(s);						
+							if(eb.percentage == false)
+							{
+									String s = eb.name + ChatColor.RED + boss.getName() + ChatColor.GRAY + " [" +ChatColor.DARK_RED + boss.getHealth() + ChatColor.GRAY + "/" + ChatColor.DARK_RED + boss.getMaxHealth() + ChatColor.GRAY + "]";
+									p.sendMessage(s);							
+							}
+							else
+							{
+								double per = (((double)boss.getHealth()/boss.getMaxHealth())*10)+1;
+								if(!boss.hasPercent((int)per))
+								{
+									String s = eb.name + ChatColor.RED + boss.getName() + ChatColor.GRAY + " [" +ChatColor.DARK_RED + ((int)per*10) + "%" + ChatColor.GRAY + "]";
+									for(Player player : eb.skillhandler.getPlayersRadious(20, boss))
+									{
+										player.sendMessage(s);
+									}
+									boss.addPercent((int)per);
+								}
+							}
 						}
 					}
 				}

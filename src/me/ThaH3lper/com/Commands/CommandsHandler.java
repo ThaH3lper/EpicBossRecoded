@@ -16,7 +16,7 @@ public class CommandsHandler implements CommandExecutor{
 	{
 		eb = boss;
 		CP = new CommandsPlayer(eb);
-		CC = new CommandsConsole();
+		CC = new CommandsConsole(eb);
 	}
 	public boolean onCommand(CommandSender sender, Command cmd, String commandlabel, String[] args)
 	{

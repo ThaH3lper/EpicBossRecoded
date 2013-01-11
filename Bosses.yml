@@ -18,3 +18,13 @@ Bosses:
     - 264:0:20 1 $&2Diamonds!
     - 35:14:16 1
     - 276:0:1 1 KNOCKBACK:2,DAMAGE_ALL:5,FIRE_ASPECT:2 $&bPower_Sword
+  test:
+    Type: zombie
+    Health: 20
+    Showhp: true
+    Damage: 10
+    Skills: 
+    Drops:
+    - 264:0:20 1 $&2Diamonds!
+    - 35:14:16 1
+    - 276:0:1 1 KNOCKBACK:2,DAMAGE_ALL:5,FIRE_ASPECT:2 $&bPower_Sword

@@ -83,28 +83,28 @@ public class Timers {
 		{
 			if(eb.timerstuff.getTimer(args[1]) == null)
 			{
-			if(eb.loadconfig.getLoadBoss(args[2]) != null)
-			{
-				if(eb.locationstuff.locationExict(args[3]))
+				if(eb.loadconfig.getLoadBoss(args[2]) != null)
 				{
-					String[] Splits = args[4].split(":");
-					int time = (Integer.parseInt(Splits[0]) * 60 *60) + (Integer.parseInt(Splits[1]) * 60) + (Integer.parseInt(Splits[2]));
-					eb.timerstuff.addTimer(args[1], args[2], args[3], time);
-					p.sendMessage(ChatColor.GREEN + "Timer " + ChatColor.DARK_PURPLE + args[1] + ChatColor.GREEN + " added!");
+					if(eb.locationstuff.locationExict(args[3]))
+					{
+						String[] Splits = args[4].split(":");
+						int time = (Integer.parseInt(Splits[0]) * 60 *60) + (Integer.parseInt(Splits[1]) * 60) + (Integer.parseInt(Splits[2]));
+						eb.timerstuff.addTimer(args[1], args[2], args[3], time);
+						p.sendMessage(ChatColor.GREEN + "Timer " + ChatColor.DARK_PURPLE + args[1] + ChatColor.GREEN + " added!");
+					}
+					else
+					{
+						p.sendMessage(ChatColor.RED + "That location does not exict!");
+					}
 				}
 				else
 				{
-					p.sendMessage(ChatColor.RED + "That location does not exict!");
+					p.sendMessage(ChatColor.RED + "That boss does not exict!");
 				}
 			}
 			else
 			{
-				p.sendMessage(ChatColor.RED + "That boss does not exict!");
-			}
-			}
-			else
-			{
-				p.sendMessage(ChatColor.RED + "Timer allready exict with that name!");
+				p.sendMessage(ChatColor.RED + "Timer already exict with that name!");
 			}
 		}
 	}

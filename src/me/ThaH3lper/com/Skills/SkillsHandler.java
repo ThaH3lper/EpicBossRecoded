@@ -8,6 +8,7 @@ import me.ThaH3lper.com.EpicBoss;
 import me.ThaH3lper.com.Boss.Boss;
 import me.ThaH3lper.com.Skills.AllSkills.Bossmsg;
 import me.ThaH3lper.com.Skills.AllSkills.Command;
+import me.ThaH3lper.com.Skills.AllSkills.Fire;
 import me.ThaH3lper.com.Skills.AllSkills.Lightning;
 import me.ThaH3lper.com.Skills.AllSkills.PotionBoss;
 import me.ThaH3lper.com.Skills.AllSkills.Potions;
@@ -26,6 +27,7 @@ public class SkillsHandler {
 	public Potions potions;
 	public PotionBoss potionboss;
 	public Lightning lightning;
+	public Fire fire;
 	
 	//Constructors
 	
@@ -39,7 +41,7 @@ public class SkillsHandler {
 		potions = new Potions(eb);
 		potionboss = new PotionBoss(eb);
 		lightning = new Lightning(eb);
-		
+		fire = new Fire(eb);
 	}
 	public void skills(Boss b, Player p)
 	{
@@ -77,6 +79,10 @@ public class SkillsHandler {
 				if(parts[0].equals("lightning"))
 				{
 					lightning.executeLightning(s, b, index);
+				}
+				if(parts[0].equals("fire"))
+				{
+					fire.executeFire(s, b, index);
 				}
 				index++;
 			}
