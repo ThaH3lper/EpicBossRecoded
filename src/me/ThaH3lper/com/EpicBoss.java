@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import me.ThaH3lper.com.Api.Api;
 import me.ThaH3lper.com.Boss.Boss;
 import me.ThaH3lper.com.Boss.BossCalculations;
 import me.ThaH3lper.com.Commands.CommandsHandler;
@@ -20,8 +21,8 @@ import me.ThaH3lper.com.Timer.TimerSeconds;
 import me.ThaH3lper.com.Timer.TimerStuff;
 import me.ThaH3lper.com.egg.BossEgg;
 import me.ThaH3lper.com.egg.BossEggListener;
-import me.ThaH3lper.locations.LocationStuff;
-import me.ThaH3lper.locations.Locations;
+import me.ThaH3lper.com.locations.LocationStuff;
+import me.ThaH3lper.com.locations.Locations;
 
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -46,6 +47,7 @@ public class EpicBoss extends JavaPlugin{
 	public LoadBossEquip loadbossequip;
 	public LocationStuff locationstuff;
 	public TimerStuff timerstuff;
+	public Api api;
 	
 	public String name;
 	public boolean percentage;
@@ -91,6 +93,7 @@ public class EpicBoss extends JavaPlugin{
 		locationstuff = new LocationStuff(this);
 		timerstuff = new TimerStuff(this);
 		timer = new TimerSeconds(this);
+		api = new Api(this);
 		
 		name = Options.getCustomConfig().getString("BossTitle");
 		name = ChatColor.translateAlternateColorCodes('&', name);

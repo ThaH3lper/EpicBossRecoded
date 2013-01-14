@@ -1,22 +1,18 @@
 package me.ThaH3lper.com.Timer;
 
 import me.ThaH3lper.com.EpicBoss;
-import me.ThaH3lper.com.Boss.Boss;
-import me.ThaH3lper.com.LoadBosses.LoadBoss;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 
 public class Timer {
 	private int time;
 	private int maxtime;
-	private String name, location, boss;
+	private String name, location, boss, spawnmsg;
 private EpicBoss eb;
 	public Timer(String newname, String newboss, String newlocation, int newtime, EpicBoss neweb)
 	{
 		maxtime = newtime;
 		boss = newboss;
 		time = 0;
+		spawnmsg = "";
 		name = newname;
 		location = newlocation;
 		eb = neweb;
@@ -36,6 +32,14 @@ private EpicBoss eb;
 	public void setTime(int ntime)
 	{
 		time = ntime;
+	}
+	public void setText(String newmsg)
+	{
+		spawnmsg = newmsg;
+	}
+	public String getText()
+	{
+		return spawnmsg;
 	}
 	public String getBossName()
 	{

@@ -5,12 +5,11 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 
 import me.ThaH3lper.com.EpicBoss;
 import me.ThaH3lper.com.Boss.Boss;
 import me.ThaH3lper.com.LoadBosses.LoadBoss;
-import me.ThaH3lper.locations.Locations;
+import me.ThaH3lper.com.locations.Locations;
 
 public class TimerStuff {
 	EpicBoss eb;
@@ -71,7 +70,15 @@ public class TimerStuff {
 					{
 						if(eb.locationstuff.locationExict(Splits[2]))
 						{
-							addTimer(Splits[0], Splits[1], Splits[2], Integer.parseInt(Splits[3]));
+							Timer time = new Timer(Splits[0], Splits[1], Splits[2], Integer.parseInt(Splits[3]), eb);
+							eb.TimersList.add(time);
+							if(Splits.length == 5)
+							{
+								String str = Splits[4].replace("_", " ");
+								str = ChatColor.translateAlternateColorCodes('&', str);
+								time.setText(str);
+							}
+							saveAllTimers();
 						}
 						else
 						{
@@ -115,6 +122,10 @@ public class TimerStuff {
 			eb.BossList.add(b);
 			
 			eb.timer.despawn.DeSpawnEvent(eb);
+			if(!time.getText().equals(""))
+			{
+				Bukkit.broadcastMessage(time.getText());
+			}
 		}
 	}
 	public Timer getTimer(String name)

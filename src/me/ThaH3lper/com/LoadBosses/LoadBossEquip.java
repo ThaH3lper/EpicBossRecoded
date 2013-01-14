@@ -30,7 +30,7 @@ public class LoadBossEquip {
 	{
 		String[] parts = s.split(" ");
 		String[] itemParts = parts[0].split(":");
-		if(itemParts.length == 3)
+		if(itemParts.length == 4)
 		{
 			EntityEquipment eq = l.getEquipment();
 			

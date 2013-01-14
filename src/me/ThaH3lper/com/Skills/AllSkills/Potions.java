@@ -2,13 +2,12 @@ package me.ThaH3lper.com.Skills.AllSkills;
 
 import java.util.Random;
 
+import me.ThaH3lper.com.EpicBoss;
+import me.ThaH3lper.com.Boss.Boss;
+
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.Vector;
-
-import me.ThaH3lper.com.EpicBoss;
-import me.ThaH3lper.com.Boss.Boss;
 
 public class Potions {
 	private EpicBoss eb;

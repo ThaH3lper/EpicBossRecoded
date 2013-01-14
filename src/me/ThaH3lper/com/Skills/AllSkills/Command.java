@@ -2,13 +2,11 @@ package me.ThaH3lper.com.Skills.AllSkills;
 
 import java.util.Random;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
-
 import me.ThaH3lper.com.EpicBoss;
 import me.ThaH3lper.com.Boss.Boss;
+
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 public class Command {
 	private EpicBoss eb;

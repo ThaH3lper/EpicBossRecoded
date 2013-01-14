@@ -1,9 +1,9 @@
 Bosses:
-  ZombieKing:
+  TestBoss:
     Type: zombie
-    Health: 400
+    Health: 500
     Showhp: true
-    Damage: 10
+    Damage: 5
     Skills: 
     - throw 20:2 >0 0.15
     - swarm pig:3 =300 1
@@ -15,16 +15,30 @@ Bosses:
     - bossmsg 25:&3$player_killed_$boss =0 1
     - command say_Good_Job! =0 1
     Drops:
-    - 264:0:20 1 $&2Diamonds!
+    - 264:0:20 1 $&2Diamonds_for_You!
     - 35:14:16 1
     - 276:0:1 1 KNOCKBACK:2,DAMAGE_ALL:5,FIRE_ASPECT:2 $&bPower_Sword
-  test:
+  ZombieKing:
     Type: zombie
-    Health: 20
+    Health: 700
     Showhp: true
-    Damage: 10
-    Skills: 
+    Damage: 14
+    Skills:
+    - throw 20:1.3 >350 0.15
+    - bossmsg 25:&4$boss_&2You_just_made_it_worse! =350 1
+    - potion 25:POISON:30:2 =350 1
+    - potion 25:BLINDNESS:30:1 =350 1
+    - potion 25:CONFUSION:30:1 =350 1
+    - throw 30:2 <350 0.2
+    - potion 25:BLINDNESS:5:1 =350 0.2
+    - swarm zombie:15 =100 1
+    - bossmsg 0:&4$player_killed_$boss! =0 1
     Drops:
-    - 264:0:20 1 $&2Diamonds!
-    - 35:14:16 1
-    - 276:0:1 1 KNOCKBACK:2,DAMAGE_ALL:5,FIRE_ASPECT:2 $&bPower_Sword
+    - 310:0:1:4 0 PROTECTION_ENVIRONMENTAL:1
+    - 311:0:1:3 0 PROTECTION_ENVIRONMENTAL:1
+    - 312:0:1:2 0 PROTECTION_ENVIRONMENTAL:1
+    - 313:0:1:1 0 PROTECTION_ENVIRONMENTAL:1
+    - 264:0:10 1
+    - 265:0:20 1
+    - 266:0:15 1
+    - 276:0:1:0 0.1 KNOCKBACK:2,DAMAGE_ALL:5,FIRE_ASPECT:2 $&bPower_Sword

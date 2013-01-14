@@ -2,12 +2,10 @@ package me.ThaH3lper.com.Skills.AllSkills;
 
 import java.util.Random;
 
-import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
-
 import me.ThaH3lper.com.EpicBoss;
 import me.ThaH3lper.com.Boss.Boss;
-import me.ThaH3lper.com.LoadBosses.LoadBoss;
+
+import org.bukkit.entity.Player;
 
 public class Fire {
 	private EpicBoss eb;

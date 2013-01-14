@@ -1,7 +1,7 @@
 package me.ThaH3lper.com.Commands;
 
 import me.ThaH3lper.com.EpicBoss;
-import me.ThaH3lper.locations.Locations;
+import me.ThaH3lper.com.locations.Locations;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

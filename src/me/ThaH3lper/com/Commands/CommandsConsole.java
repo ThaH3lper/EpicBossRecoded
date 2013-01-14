@@ -7,7 +7,7 @@ import me.ThaH3lper.com.EpicBoss;
 import me.ThaH3lper.com.Boss.Boss;
 import me.ThaH3lper.com.LoadBosses.LoadBoss;
 import me.ThaH3lper.com.Timer.Timer;
-import me.ThaH3lper.locations.Locations;
+import me.ThaH3lper.com.locations.Locations;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

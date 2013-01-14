@@ -1,6 +1,7 @@
 package me.ThaH3lper.com.Damage;
 
 import me.ThaH3lper.com.EpicBoss;
+import me.ThaH3lper.com.Api.BossDeathEvent;
 import me.ThaH3lper.com.Boss.Boss;
 
 import org.bukkit.Bukkit;
@@ -21,7 +22,6 @@ import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-import org.yaml.snakeyaml.external.com.google.gdata.util.common.base.PercentEscaper;
 
 public class DamageListener implements Listener{
 	private EpicBoss eb;
@@ -94,6 +94,11 @@ public class DamageListener implements Listener{
 					}
 					if(boss.getHealth() <= 0)
 					{
+						if(Damager instanceof Player)
+						{
+							BossDeathEvent event = new BossDeathEvent(eb, (Player) Damager, boss);
+							Bukkit.getServer().getPluginManager().callEvent(event);
+						}
 						eb.damagemethods.deathBoss(boss);
 					}
 					else if(boss.getShowHp())

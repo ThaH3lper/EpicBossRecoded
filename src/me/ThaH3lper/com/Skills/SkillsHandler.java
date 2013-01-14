@@ -93,12 +93,20 @@ public class SkillsHandler {
 		List<Player> playerlist = new ArrayList<Player>();
 		for(Player p: Bukkit.getOnlinePlayers())
 		{
-			if(b.getLocation().getWorld() == p.getLocation().getWorld())
+			if(radious != 0)
 			{
-				if(b.getLocation().distance(p.getLocation()) < radious)
+				if(b.getLocation().getWorld() == p.getLocation().getWorld())
 				{
-					playerlist.add(p);
-				}
+
+					if(b.getLocation().distance(p.getLocation()) < radious)
+					{
+						playerlist.add(p);
+					}
+				}	
+			}
+			else
+			{
+				playerlist.add(p);
 			}
 		}
 		return playerlist;

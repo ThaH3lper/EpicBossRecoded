@@ -1,4 +1,4 @@
-package me.ThaH3lper.locations;
+package me.ThaH3lper.com.locations;
 
 import org.bukkit.Location;
 
