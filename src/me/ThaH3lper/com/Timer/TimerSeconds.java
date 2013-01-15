@@ -8,11 +8,13 @@ public class TimerSeconds {
 	public Despawn despawn = new Despawn();
 	private EpicBoss eb;
 	
-	@SuppressWarnings("deprecation")
+	/*
+	 * Changed to sync repeating task. -Cronos
+	 */
 	public TimerSeconds(EpicBoss boss)
 	{
 		eb = boss;
-		eb.getServer().getScheduler().scheduleAsyncRepeatingTask(eb, new Runnable() {
+		eb.getServer().getScheduler().scheduleSyncRepeatingTask(eb, new Runnable() {
 		    @Override  
 		    public void run() {
 		        despawn.DeSpawnEvent(eb);
