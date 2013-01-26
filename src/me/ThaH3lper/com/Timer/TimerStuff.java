@@ -50,6 +50,10 @@ public class TimerStuff {
 			for(Timer time: eb.TimersList)
 			{
 				String save = time.getName() + ":" + time.getBossName() + ":" + time.getLocationStr() + ":" + time.getMaxTime();
+				if(time.getText() != "")
+				{
+					save = time.getName() + ":" + time.getBossName() + ":" + time.getLocationStr() + ":" + time.getMaxTime() + ":" + time.getText();
+				}
 				saved.add(save);
 			}
 			eb.SavedData.reloadCustomConfig();
@@ -74,9 +78,7 @@ public class TimerStuff {
 							eb.TimersList.add(time);
 							if(Splits.length == 5)
 							{
-								String str = Splits[4].replace("_", " ");
-								str = ChatColor.translateAlternateColorCodes('&', str);
-								time.setText(str);
+								time.setText(Splits[4]);
 							}
 							saveAllTimers();
 						}
@@ -124,7 +126,10 @@ public class TimerStuff {
 			eb.timer.despawn.DeSpawnEvent(eb);
 			if(!time.getText().equals(""))
 			{
-				Bukkit.broadcastMessage(time.getText());
+				String s = time.getText();
+				s = s.replace("_", " ");
+				s = ChatColor.translateAlternateColorCodes('&', s);
+				Bukkit.broadcastMessage(s);
 			}
 		}
 	}

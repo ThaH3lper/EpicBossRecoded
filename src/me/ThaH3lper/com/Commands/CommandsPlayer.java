@@ -34,6 +34,7 @@ public class CommandsPlayer{
 			p.sendMessage(ChatColor.RED + "/eb timers" + ChatColor.GRAY + ChatColor.ITALIC + "  Commands/info about Timers");
 			p.sendMessage(ChatColor.RED + "/eb bossegg" + ChatColor.GRAY + ChatColor.ITALIC + "  Commands/info about bossegg");
 			p.sendMessage(ChatColor.RED + "/eb reload" + ChatColor.GRAY + ChatColor.ITALIC + "    Reload changes in Bosses.yml");
+			p.sendMessage(ChatColor.DARK_GRAY + "" +  ChatColor.ITALIC + "(Version 1.2.0, Coded by ThaH3lper)");
 		}
 		if(args.length >= 1)
 		{

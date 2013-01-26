@@ -1,5 +1,7 @@
 package me.ThaH3lper.com.Damage;
 
+import java.util.List;
+
 import me.ThaH3lper.com.EpicBoss;
 import me.ThaH3lper.com.Api.BossDeathEvent;
 import me.ThaH3lper.com.Boss.Boss;
@@ -22,9 +24,12 @@ import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.entity.EntityTameEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class DamageListener implements Listener{
 	private EpicBoss eb;
+	BossDeathEvent event;
 	public DamageListener(EpicBoss boss)
 	{
 		eb = boss;
@@ -78,6 +83,10 @@ public class DamageListener implements Listener{
 		}
 		if(Damager instanceof LivingEntity && Hited instanceof LivingEntity)
 		{
+			if(eb.bossCalculator.isBoss(Damager) == false && eb.bossCalculator.isBoss(Hited) == false)
+			{
+				return;
+			}
 			int damage = e.getDamage();
 			LivingEntity hited = (LivingEntity) Hited; //Hited entity is now "hited" since it's a LivingEntity
 			if(eb.bossCalculator.isBoss(Hited))
@@ -94,12 +103,14 @@ public class DamageListener implements Listener{
 					}
 					if(boss.getHealth() <= 0)
 					{
+						List<ItemStack> dropItems = eb.dropitems.getDrops(boss);
+						int exp = eb.dropitems.getExp(boss);
 						if(Damager instanceof Player)
 						{
-							BossDeathEvent event = new BossDeathEvent(eb, (Player) Damager, boss);
+							event = new BossDeathEvent(eb, (Player) Damager, boss, dropItems, exp);
 							Bukkit.getServer().getPluginManager().callEvent(event);
 						}
-						eb.damagemethods.deathBoss(boss);
+						eb.damagemethods.deathBoss(boss, dropItems, event.getExp());
 					}
 					else if(boss.getShowHp())
 					{
@@ -151,6 +162,14 @@ public class DamageListener implements Listener{
 	@EventHandler(priority=EventPriority.HIGH)
 	  public void BossNoFire(EntityCombustEvent e)
 	{	
+		if(eb.bossCalculator.isBoss(e.getEntity()))
+		{
+			e.setCancelled(true);
+		}
+	}
+	@EventHandler(priority=EventPriority.HIGH)
+	  public void NoTaming(EntityTameEvent e)
+	{
 		if(eb.bossCalculator.isBoss(e.getEntity()))
 		{
 			e.setCancelled(true);

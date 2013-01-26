@@ -5,14 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.ThaH3lper.com.EpicBoss;
+import me.ThaH3lper.com.Api.BossSkillEvent;
 import me.ThaH3lper.com.Boss.Boss;
 import me.ThaH3lper.com.Skills.AllSkills.Bossmsg;
 import me.ThaH3lper.com.Skills.AllSkills.Command;
+import me.ThaH3lper.com.Skills.AllSkills.CustomSkill;
+import me.ThaH3lper.com.Skills.AllSkills.DragIn;
 import me.ThaH3lper.com.Skills.AllSkills.Fire;
 import me.ThaH3lper.com.Skills.AllSkills.Lightning;
 import me.ThaH3lper.com.Skills.AllSkills.PotionBoss;
 import me.ThaH3lper.com.Skills.AllSkills.Potions;
 import me.ThaH3lper.com.Skills.AllSkills.Swarm;
+import me.ThaH3lper.com.Skills.AllSkills.Teleport;
 import me.ThaH3lper.com.Skills.AllSkills.Throw;
 
 import org.bukkit.Bukkit;
@@ -28,6 +32,11 @@ public class SkillsHandler {
 	public PotionBoss potionboss;
 	public Lightning lightning;
 	public Fire fire;
+	public DragIn dragin;
+	public Teleport teleport;
+	private CustomSkill customskill;
+	
+	public BossSkillEvent event;
 	
 	//Constructors
 	
@@ -42,6 +51,9 @@ public class SkillsHandler {
 		potionboss = new PotionBoss(eb);
 		lightning = new Lightning(eb);
 		fire = new Fire(eb);
+		dragin = new DragIn(eb);
+		teleport = new Teleport(eb);
+		customskill = new CustomSkill(eb);
 	}
 	public void skills(Boss b, Player p)
 	{
@@ -56,33 +68,55 @@ public class SkillsHandler {
 				{
 					swarm.executeSwarm(s, b, index);
 				}
-				if(parts[0].equals("throw"))
+				else if(parts[0].equals("throw"))
 				{
 					throwplayer.executeThrow(s, b, index);
 				}
-				if(parts[0].equals("command"))
+				else if(parts[0].equals("command"))
 				{
 					command.executeCommand(s, b, index, p);
 				}
-				if(parts[0].equals("bossmsg"))
+				else if(parts[0].equals("bossmsg"))
 				{
 					bossmsg.executeMsg(s, b, index, p);
 				}
-				if(parts[0].equals("potion"))
+				else if(parts[0].equals("potion"))
 				{
 					potions.executePotions(s, b, index);
 				}
-				if(parts[0].equals("potionboss"))
+				else if(parts[0].equals("potionboss"))
 				{
 					potionboss.executeBossPotions(s, b, index);
 				}
-				if(parts[0].equals("lightning"))
+				else if(parts[0].equals("lightning"))
 				{
 					lightning.executeLightning(s, b, index);
 				}
-				if(parts[0].equals("fire"))
+				else if(parts[0].equals("fire"))
 				{
 					fire.executeFire(s, b, index);
+				}
+				else if(parts[0].equals("dragin"))
+				{
+					dragin.executeDragin(s, b, index);
+				}
+				else if(parts[0].equals("teleport"))
+				{
+					teleport.executeTeleport(s, b, index, p);
+				}
+				else
+				{
+					if(eb.CustomSkills != null)
+					{
+						for(String skill: eb.CustomSkills)
+						{
+							if(parts[0].equals(skill))
+							{
+								customskill.executeThrow(s, b, index);
+							}
+						}
+					}
+						
 				}
 				index++;
 			}

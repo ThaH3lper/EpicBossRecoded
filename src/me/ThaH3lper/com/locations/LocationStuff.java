@@ -14,12 +14,12 @@ public class LocationStuff {
 	{
 		eb = neweb;
 		loadLocation();
+		saveLocation();
 	}
 	
 	public void addLocation(String name, Location l)
 	{
 		eb.LocationList.add(new Locations(l, name));
-		saveLocation();
 	}
 	
 	public void removeLocation(String name)

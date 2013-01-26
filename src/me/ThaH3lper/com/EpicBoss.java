@@ -57,6 +57,7 @@ public class EpicBoss extends JavaPlugin{
 	public List<LoadBoss> BossLoadList = new ArrayList<LoadBoss>();
 	public List<Locations> LocationList = new ArrayList<Locations>();
 	public List<Timer> TimersList = new ArrayList<Timer>();
+	public List<String> CustomSkills = new ArrayList<String>();
 	
 	@Override
 	public void onDisable() {
@@ -84,7 +85,7 @@ public class EpicBoss extends JavaPlugin{
 		Options = new SaveLoad(this, "Options.yml");
 		SavedData = new SaveLoad(this, "SavedData.yml");
 		loadconfig = new LoadConfigs(this);
-		dropitems = new DropItems();
+		dropitems = new DropItems(this);
 		loaditems = new LoadItems();
 		damagemethods = new DamageMethods(this);
 		bossegg = new BossEgg(this);

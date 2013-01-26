@@ -3,8 +3,10 @@ package me.ThaH3lper.com.Skills.AllSkills;
 import java.util.Random;
 
 import me.ThaH3lper.com.EpicBoss;
+import me.ThaH3lper.com.Api.BossSkillEvent;
 import me.ThaH3lper.com.Boss.Boss;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -48,6 +50,15 @@ public class Bossmsg {
 				sendMsg(settings[1], chance, Integer.parseInt(settings[0]), b, p);
 			}
 		}
+		else if(parts[2].contains("/"))
+		{
+			String exe = parts[2].replace("/", "");
+			String[] value = exe.split("-");
+			if(b.getHealth() < Integer.parseInt(value[0]) && b.getHealth() > Integer.parseInt(value[1]))
+			{
+				sendMsg(settings[1], chance, Integer.parseInt(settings[0]), b, p);
+			}
+		}
 	}
 	public void sendMsg(String s, float chance, int radious, Boss b, Player pla)
 	{
@@ -57,8 +68,11 @@ public class Bossmsg {
 			{
 				for(Player p : eb.skillhandler.getPlayersRadious(radious, b))
 				{
+					eb.skillhandler.event = new BossSkillEvent(eb, b, "bossmsg", false);
+					Bukkit.getServer().getPluginManager().callEvent(eb.skillhandler.event);
 					s = s.replace("_", " ");
-					s = s.replace("$player", pla.getName());
+					if(p != null)
+						s = s.replace("$player", pla.getName());
 					s = s.replace("$boss", b.getName());
 					s = ChatColor.translateAlternateColorCodes('&', s);
 					p.sendMessage(s);

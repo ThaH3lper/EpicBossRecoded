@@ -1,5 +1,9 @@
 package me.ThaH3lper.com.Damage;
 
+import java.util.List;
+
+import org.bukkit.inventory.ItemStack;
+
 import me.ThaH3lper.com.EpicBoss;
 import me.ThaH3lper.com.Boss.Boss;
 
@@ -10,14 +14,10 @@ public class DamageMethods {
 	{
 		eb = boss;
 	}
-	public void deathBoss(Boss b)
+	public void deathBoss(Boss b, List<ItemStack> stack, int exp)
 	{
 		eb.timerstuff.Death(b);
-		if(b.getItems() != null)
-		{
-			for(String s:b.getItems())
-				eb.dropitems.dropItems(eb.loaditems.getItem(s), eb.loaditems.getItemChance(s), b.getLocation(), eb.loaditems.getDisplayName(s));
-		}
+		eb.dropitems.dropItems(stack, b, exp);
 		if(b.getLivingEntity() != null)
 		{
 			b.getLivingEntity().remove();

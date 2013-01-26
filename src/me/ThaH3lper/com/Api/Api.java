@@ -14,7 +14,7 @@ public class Api {
 	
 	public boolean isBoss(LivingEntity l)
 	{
-		if(eb.bossCalculator.isBoss(l))
+		if(eb.bossCalculator.isBossLiv(l))
 		{
 			return true;
 		}
@@ -43,6 +43,11 @@ public class Api {
 	{
 		Boss b = eb.bossCalculator.getBoss(l);
 		return b.getShowHp();
+	}
+	
+	public void addNewSkill(String name)
+	{
+		eb.CustomSkills.add(name);
 	}
 
 }

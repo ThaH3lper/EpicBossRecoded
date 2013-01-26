@@ -30,6 +30,23 @@ public class BossCalculations {
 		}
 		return false;
 	}
+	public boolean isBossLiv(LivingEntity e)
+	{
+		if(eb.BossList != null)
+		{
+			for(Boss boss : eb.BossList)
+			{
+				if(boss.getLivingEntity() != null)
+				{
+					if(e.getEntityId() == boss.getId())
+					{
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 	public Boss getBoss(Entity e)
 	{
 		int id = e.getEntityId();

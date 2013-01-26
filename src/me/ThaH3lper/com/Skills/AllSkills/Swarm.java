@@ -2,7 +2,10 @@ package me.ThaH3lper.com.Skills.AllSkills;
 
 import java.util.Random;
 
+import org.bukkit.Bukkit;
+
 import me.ThaH3lper.com.EpicBoss;
+import me.ThaH3lper.com.Api.BossSkillEvent;
 import me.ThaH3lper.com.Boss.Boss;
 import me.ThaH3lper.com.LoadBosses.LoadBoss;
 
@@ -49,19 +52,35 @@ public class Swarm {
 				spawn(settings[0], amount, b, chance);
 			}
 		}
+		else if(parts[2].contains("/"))
+		{
+			String exe = parts[2].replace("/", "");
+			String[] value = exe.split("-");
+			if(b.getHealth() < Integer.parseInt(value[0]) && b.getHealth() > Integer.parseInt(value[1]))
+			{
+				spawn(settings[0], amount, b, chance);
+			}
+		}
 	}
 	public void spawn(String mob, int amount, Boss b, float Chance)
 	{
 
 		if(r.nextFloat() <= Chance)
 		{
-			if(mob.contains("!"))
+			eb.skillhandler.event = new BossSkillEvent(eb, b, "swarm", false);
+			Bukkit.getServer().getPluginManager().callEvent(eb.skillhandler.event);
+			if(mob.contains("$"))
 			{
-				String bossname = mob.replace("!", "");
+				String bossname = mob.replace("$", "");
 				LoadBoss lb = eb.loadconfig.getLoadBoss(bossname);
 				if(lb != null)
 				{
-					eb.BossList.add(new Boss(lb.getName(), lb.getHealth(), b.getLocation(), lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems(), lb.getSkills()));
+					int i = 1;
+					while( i <= amount)
+					{
+						i++;
+						eb.BossList.add(new Boss(lb.getName(), lb.getHealth(), b.getLocation(), lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems(), lb.getSkills()));
+					}
 				}
 			}
 			else

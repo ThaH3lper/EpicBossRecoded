@@ -24,9 +24,12 @@ public class Despawn {
 					{
 						if(PlayersInside(boss.getLocation()) == false)
 						{
-							boss.setSaved(true);
-							boss.setSavedLocation(boss.getLocation());
-							boss.getLivingEntity().remove();
+							if(!boss.getEntitySpawnName().equals("enderdragon"))
+							{
+								boss.setSaved(true);
+								boss.setSavedLocation(boss.getLocation());
+								boss.getLivingEntity().remove();
+							}
 						}
 					}
 				}
@@ -39,6 +42,7 @@ public class Despawn {
 						l.setHealth(l.getMaxHealth() - 1);
 						boss.setEntity(l);
 						eb.loadbossequip.SetEqupiment(boss);
+						eb.skillhandler.skills(boss, null);
 						
 					}
 				}
@@ -63,7 +67,7 @@ public class Despawn {
 			}
 		}
 	}
-	//PLayer inside 40 blocks returns true
+	//Player inside 40 blocks returns true
 	public boolean PlayersInside(Location l)
 	{
 		for(Player p : Bukkit.getServer().getOnlinePlayers())

@@ -18,6 +18,7 @@ public class Boss {
 	private boolean saved = true;
 	private List<String> Items, Skills;
 	private List<Integer> percent;
+	private List<String> Effects;
 	
 	
 	public Boss(String newname, int newmaxhealth, Location newspawnlocation, String newentityspawnname, int newdamage, boolean newshowHP, List<String> newItems, List<String> newSkills)
@@ -33,6 +34,7 @@ public class Boss {
 		Items = new ArrayList<String>(newItems);
 		Skills = new ArrayList<String>(newSkills);
 		percent = new ArrayList<Integer>();
+		Effects = AddSkills();
 		Timer = "null";
 	}
 	public int getDamage()
@@ -165,5 +167,22 @@ public class Boss {
 	{
 		return Timer;
 	}
+	public List<String> getEffects()
+	{
+		return Effects;
+	}
 
+	private List<String> AddSkills()
+	{
+		List<String> skills = new ArrayList<String>();
+		for(String s : getSkill())
+		{
+			String[] Parts = s.split(" ");
+			if(Parts[0].equalsIgnoreCase("effect"))
+			{
+				skills.add(Parts[1]);
+			}
+		}
+		return skills;
+	}
 }
