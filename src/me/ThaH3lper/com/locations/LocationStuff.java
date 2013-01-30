@@ -14,12 +14,12 @@ public class LocationStuff {
 	{
 		eb = neweb;
 		loadLocation();
-		saveLocation();
 	}
 	
 	public void addLocation(String name, Location l)
 	{
 		eb.LocationList.add(new Locations(l, name));
+		saveLocation();
 	}
 	
 	public void removeLocation(String name)
@@ -52,10 +52,11 @@ public class LocationStuff {
 					String name = Splits[0];
 					Location l = new Location(Bukkit.getWorld(Splits[1]), Double.parseDouble(Splits[2]), Double.parseDouble(Splits[3]), Double.parseDouble(Splits[4]));
 					
-					addLocation(name, l);
+					eb.LocationList.add(new Locations(l, name));
 				}
 			}
-		}	
+		}
+		saveLocation();
 	}
 	
 	public void saveLocation()

@@ -92,6 +92,7 @@ public class Swarm {
 					eb.mobs.SpawnMob(mob, b.getLocation());
 				}
 			}
+			eb.timer.despawn.DeSpawnEvent(eb);
 		}
 	}
 }

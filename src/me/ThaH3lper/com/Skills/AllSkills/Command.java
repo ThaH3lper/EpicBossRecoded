@@ -66,6 +66,7 @@ public class Command {
 			Bukkit.getServer().getPluginManager().callEvent(eb.skillhandler.event);
 			
 			s = s.replace("_", " ");
+			s = s.replace("@", "_");
 			if(p != null)
 				s = s.replace("$player", p.getName());
 			s = s.replace("$boss", b.getName());

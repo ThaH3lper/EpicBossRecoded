@@ -21,7 +21,9 @@ public class LoadBossEquip {
 			{
 				for(String s:b.getItems())
 				{
-					equip(s, eb.loaditems.getItem(s), b.getLivingEntity());
+					String[] parts = s.split(" ");
+					if(!parts[0].equals("exp"))
+						equip(s, eb.loaditems.getItem(s), b.getLivingEntity());
 				}
 			}
 		}

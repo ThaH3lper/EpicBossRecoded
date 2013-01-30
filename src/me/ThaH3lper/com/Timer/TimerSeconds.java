@@ -24,7 +24,7 @@ public class TimerSeconds {
 		        eb.timerstuff.lower();
 		        skillsShow();
 		    }
-		}, 0L, 20L);
+		}, 0L, 100L);
 	}
 	public void skillsShow()
 	{

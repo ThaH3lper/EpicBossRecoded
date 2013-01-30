@@ -51,14 +51,14 @@ private EpicBoss eb;
 	}
 	public void lower()
 	{
-		if(time == 0)
+		if(time <= 0 && time >= -9)
 		{
 			eb.timerstuff.spawndeath(this);
-			time = -1;
+			time = -10;
 		}
-		else if(time != -1)
+		else if(time != -10)
 		{
-			time--;
+			time-=5;
 		}
 	}
 }
