@@ -9,12 +9,14 @@ import me.ThaH3lper.com.LoadBosses.LoadBoss;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Dispenser;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockDispenseEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
@@ -73,6 +75,30 @@ public class BossEggListener implements Listener{
 				}
 			}
 			}
+		}
+	}
+	@EventHandler(priority=EventPriority.HIGH)
+	  public void ShootEgg(BlockDispenseEvent e)
+	{
+		if(e.getItem().getTypeId() == 383)
+		{
+			if(e.getItem().getItemMeta().hasLore())
+			{
+				List<String> list = e.getItem().getItemMeta().getLore();
+				if(list.get(0).equals(ChatColor.DARK_PURPLE +"" + ChatColor.ITALIC + "A very mysterious egg"))
+				{
+					final LoadBoss lb = getloadBossforEgg(list.get(2));
+					if(lb != null)
+					{
+						Boss b = new Boss(lb.getName(), lb.getHealth(), e.getBlock().getLocation(), lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems(), lb.getSkills());
+						eb.BossList.add(b);			
+						eb.timer.despawn.DeSpawnEvent(eb);
+						if(b.getLivingEntity() != null)
+							b.getLivingEntity().setVelocity(new Vector(0f, 0.5f, 0f));
+						
+				}
+			}
+		}
 		}
 	}
 	public LoadBoss getloadBossforEgg(String s)
