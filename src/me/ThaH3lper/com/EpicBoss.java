@@ -100,7 +100,5 @@ public class EpicBoss extends JavaPlugin{
 		name = ChatColor.translateAlternateColorCodes('&', name);
 		
 		percentage = Options.getCustomConfig().getBoolean("percentage");
-		
-		loadconfig.LoadAllBosses();
 	}
 }
