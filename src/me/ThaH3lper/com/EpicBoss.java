@@ -51,6 +51,7 @@ public class EpicBoss extends JavaPlugin{
 	
 	public String name;
 	public boolean percentage;
+	public boolean SpoutEnabled;
 	
 	//Important Stuff!
 	public List<Boss> BossList = new ArrayList<Boss>();
@@ -100,5 +101,8 @@ public class EpicBoss extends JavaPlugin{
 		name = ChatColor.translateAlternateColorCodes('&', name);
 		
 		percentage = Options.getCustomConfig().getBoolean("percentage");
+		
+		if ((Main.pm.isPluginEnabled("Spout")))
+			SpoutEnabled = true;
 	}
 }

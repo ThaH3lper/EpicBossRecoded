@@ -43,7 +43,14 @@ public class Despawn {
 						boss.setEntity(l);
 						eb.loadbossequip.SetEqupiment(boss);
 						eb.skillhandler.skills(boss, null);
-						
+						if(eb.SpoutEnabled && boss.getSkinUrl() != null)
+						{
+							Spout.getServer().setEntitySkin(l, boss.getSkinUrl(), EntitySkinType.DEFAULT);
+						}
+						if(eb.SpoutEnabled && boss.isTitleShowed())
+						{
+							Spout.getServer().setTitle(l, boss.getEntitySpawnName());
+						}
 					}
 				}
 				//This is used so if it gets removed it will be spawned again!

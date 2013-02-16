@@ -63,7 +63,7 @@ public class BossEggListener implements Listener{
 					        eb.getServer().getScheduler().scheduleSyncDelayedTask(eb, new Runnable() {
 
 					        	   public void run() {
-									eb.BossList.add(new Boss(lb.getName(), lb.getHealth(), item.getLocation(), lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems(), lb.getSkills()));
+					        		   eb.BossList.add(new Boss(lb.getName(), lb.getHealth(), p.getLocation(), lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems(), lb.getSkills()).showTitle(lb.getShowtitle()).setSkinUrl(lb.getSkin()));
 										
 									//Call despawner/spawner for instant spawn!
 									eb.timer.despawn.DeSpawnEvent(eb);
@@ -90,7 +90,7 @@ public class BossEggListener implements Listener{
 					final LoadBoss lb = getloadBossforEgg(list.get(2));
 					if(lb != null)
 					{
-						Boss b = new Boss(lb.getName(), lb.getHealth(), e.getBlock().getLocation(), lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems(), lb.getSkills());
+						Boss b = new Boss(lb.getName(), lb.getHealth(), p.getLocation(), lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems(), lb.getSkills()).showTitle(lb.getShowtitle()).setSkinUrl(lb.getSkin());
 						eb.BossList.add(b);			
 						eb.timer.despawn.DeSpawnEvent(eb);
 						if(b.getLivingEntity() != null)

@@ -19,6 +19,8 @@ public class Boss {
 	private List<String> Items, Skills;
 	private List<Integer> percent;
 	private List<String> Effects;
+	private String skin;
+	private Boolean showtitle;
 	
 	
 	public Boss(String newname, int newmaxhealth, Location newspawnlocation, String newentityspawnname, int newdamage, boolean newshowHP, List<String> newItems, List<String> newSkills)
@@ -170,6 +172,24 @@ public class Boss {
 	public List<String> getEffects()
 	{
 		return Effects;
+	}
+	public String getSkinUrl()
+	{
+		return skin;
+	}
+	public Boss setSkinUrl(String skin)
+	{
+		this.skin = skin;
+		return this;
+	}
+	public boolean isTitleShowed()
+	{
+		return showtitle;
+	}
+	public Boss showTitle(Boolean show)
+	{
+		showtitle = show;
+		return this;
 	}
 
 	private List<String> AddSkills()
