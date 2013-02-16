@@ -11,8 +11,10 @@ public class LoadBoss {
 	boolean Showhp;
 	public List<String> Items;
 	public List<String> Skillslist;
+	boolean showtitle = false;
+	String skin;
 	
-	public LoadBoss(String newName, String newType, int newHealth, int newDamage, List<String> newItems, boolean newShowhp, List<String> newskills)
+	public LoadBoss(String newName, String newType, int newHealth, int newDamage, List<String> newItems, boolean newShowhp, List<String> newskills, String Skin, Boolean Showtitle)
 	{
 		Name = newName;
 		Type = newType;
@@ -21,6 +23,8 @@ public class LoadBoss {
 		Items = new ArrayList<String>(newItems);
 		Showhp = newShowhp;
 		Skillslist = new ArrayList<String>(newskills);
+		skin = Skin;
+		showtitle = Showtitle;
 	}
 	public String getName()
 	{
@@ -49,6 +53,14 @@ public class LoadBoss {
 	public boolean getShowhp()
 	{
 		return Showhp;
+	}
+	public boolean getShowtitle()
+	{
+		return showtitle;
+	}
+	public String getSkin()
+	{
+		return skin;
 	}
 
 }
