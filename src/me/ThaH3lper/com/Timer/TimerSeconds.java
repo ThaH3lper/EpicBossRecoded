@@ -10,7 +10,6 @@ public class TimerSeconds {
 
 	public Despawn despawn = new Despawn();
 	private EpicBoss eb;
-	public boolean start = true;
 
 	/*
 	 * Changed to sync repeating task. -Cronos
@@ -24,12 +23,6 @@ public class TimerSeconds {
 		        despawn.DeSpawnEvent(eb);
 		        eb.timerstuff.lower();
 		        skillsShow();
-		        if(start)
-		        {
-		        	start = false;
-		    		eb.loadconfig.LoadAllBosses();
-		    		eb.getLogger().info("Locations has been loaded correctly!");
-		        }
 		    }
 		}, 100L, 100L);
 	}

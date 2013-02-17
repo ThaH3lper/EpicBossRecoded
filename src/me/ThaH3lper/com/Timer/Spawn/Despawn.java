@@ -14,8 +14,6 @@ public class Despawn {
 	{
 		if(eb.BossList != null)
 		{
-			try
-			{
 			for(Boss boss : eb.BossList)
 			{
 				if(boss.getSaved() == false)
@@ -29,6 +27,10 @@ public class Despawn {
 								boss.setSaved(true);
 								boss.setSavedLocation(boss.getLocation());
 								boss.getLivingEntity().remove();
+								if(eb.regain)
+								{
+									boss.sethealth(boss.getMaxHealth());
+								}
 							}
 						}
 					}
@@ -61,9 +63,6 @@ public class Despawn {
 						}
 					}
 				}
-			}
-			}
-			catch (Exception e) {
 			}
 		}
 	}

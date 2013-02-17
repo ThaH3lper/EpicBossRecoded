@@ -1,8 +1,8 @@
 # --== Options for EpicBossRecoded ==--
 # -----------------------------
-# Here is the message when you hit the boss
-# [EpicBoss], change this to your own text :)
+# "BossTitle" This is what shows up when hp of boss is shing in chat, this is the prefix!
+# "percentage" If it's "true" it will boss HP every 10%, Recomended
+# "RegainHealth" Set to true if you want boss to get 100% hp if no player is near it.
 BossTitle: '&7[&4EpicBoss&7] '
-# Do you want the health of the boss in percentage every 10%
-# true = Percentage, false = show current health on every hit
 percentage: false
+RegainHealth: false

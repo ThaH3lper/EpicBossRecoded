@@ -27,13 +27,16 @@ public class DropItems {
 		{
 			b.getLocation().getWorld().dropItem(b.getLocation(), s);
 		}
-		int i = 0;
-		int x = exp/20;
-		while(i<20)
+		if(exp != 0)
 		{
-			ExperienceOrb ob = (ExperienceOrb) b.getLocation().getWorld().spawnEntity(b.getLocation(), EntityType.EXPERIENCE_ORB);
-			ob.setExperience(x);
-			i += 1;
+			int i = 0;
+			int x = exp/20;
+			while(i<20)
+			{
+				ExperienceOrb ob = (ExperienceOrb) b.getLocation().getWorld().spawnEntity(b.getLocation(), EntityType.EXPERIENCE_ORB);
+				ob.setExperience(x + 1);
+				i += 1;
+			}
 		}
 	}
 	public List<ItemStack> getDrops(Boss b)

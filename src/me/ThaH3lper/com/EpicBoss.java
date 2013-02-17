@@ -34,6 +34,7 @@ public class EpicBoss extends JavaPlugin{
 	public final Logger logger = Logger.getLogger("Minecraft");
 	
 	//Constructor start
+	public EpicBoss plugin;
 	public BossCalculations bossCalculator;
 	public Mobs mobs;
 	public TimerSeconds timer;
@@ -51,6 +52,7 @@ public class EpicBoss extends JavaPlugin{
 	
 	public String name;
 	public boolean percentage;
+	public boolean regain = false;
 	
 	//Important Stuff!
 	public List<Boss> BossList = new ArrayList<Boss>();
@@ -68,37 +70,47 @@ public class EpicBoss extends JavaPlugin{
 	}
 	@Override
 	public void onEnable() {
+		plugin = this;
+		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+		    @Override 
+		    public void run() {
 
-		PluginManager manager = this.getServer().getPluginManager();
-		manager.registerEvents(new DamageListener(this), this);
-		manager.registerEvents(new BossEggListener(this), this);
+		PluginManager manager = plugin.getServer().getPluginManager();
+		manager.registerEvents(new DamageListener(plugin), plugin);
+		manager.registerEvents(new BossEggListener(plugin), plugin);
 		
-		PluginDescriptionFile pdfFile = this.getDescription();
-		this.logger.info("[EpicBoss-Recoded] " + pdfFile.getVersion() +  " Has Been Enabled!");
+		PluginDescriptionFile pdfFile = plugin.getDescription();
+		plugin.logger.info("[EpicBoss-Recoded] " + pdfFile.getVersion() +  " Has Been Enabled!");
 		
-		getCommand("EpicBoss").setExecutor(new CommandsHandler(this));
+		getCommand("EpicBoss").setExecutor(new CommandsHandler(plugin));
 		
 		//Constructor Give Info
-		bossCalculator = new BossCalculations(this);
+		bossCalculator = new BossCalculations(plugin);
 		mobs = new Mobs();
-		Bosses = new SaveLoad(this, "Bosses.yml");
-		Options = new SaveLoad(this, "Options.yml");
-		SavedData = new SaveLoad(this, "SavedData.yml");
-		loadconfig = new LoadConfigs(this);
-		dropitems = new DropItems(this);
+		Bosses = new SaveLoad(plugin, "Bosses.yml");
+		Options = new SaveLoad(plugin, "Options.yml");
+		SavedData = new SaveLoad(plugin, "SavedData.yml");
+		loadconfig = new LoadConfigs(plugin);
+		dropitems = new DropItems(plugin);
 		loaditems = new LoadItems();
-		damagemethods = new DamageMethods(this);
-		bossegg = new BossEgg(this);
-		skillhandler = new SkillsHandler(this);
-		loadbossequip = new LoadBossEquip(this);
-		locationstuff = new LocationStuff(this);
-		timerstuff = new TimerStuff(this);
-		timer = new TimerSeconds(this);
-		api = new Api(this);
+		damagemethods = new DamageMethods(plugin);
+		bossegg = new BossEgg(plugin);
+		skillhandler = new SkillsHandler(plugin);
+		loadbossequip = new LoadBossEquip(plugin);
+		locationstuff = new LocationStuff(plugin);
+		timerstuff = new TimerStuff(plugin);
+		timer = new TimerSeconds(plugin);
+		api = new Api(plugin);
 		
 		name = Options.getCustomConfig().getString("BossTitle");
 		name = ChatColor.translateAlternateColorCodes('&', name);
 		
 		percentage = Options.getCustomConfig().getBoolean("percentage");
+		
+		regain = Options.getCustomConfig().getBoolean("RegainHealth");
+		
+		loadconfig.LoadAllBosses();
+		    }
+		}, 1L);
 	}
 }

@@ -5,11 +5,13 @@ import org.bukkit.Location;
 public class Locations {
 	private Location location;
 	private String name;
+	private String World;
 	
-	public Locations(Location loc, String newname)
+	public Locations(Location loc, String newname, String worldname)
 	{
 		location = loc;
 		name = newname;
+		World = worldname;
 	}
 	
 	public Location getLocation()
@@ -20,5 +22,10 @@ public class Locations {
 	public String getName()
 	{
 		return name;
+	}
+	
+	public String getWorldName()
+	{
+		return World;
 	}
 }

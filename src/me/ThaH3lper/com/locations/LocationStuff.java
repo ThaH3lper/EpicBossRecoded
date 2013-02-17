@@ -14,11 +14,12 @@ public class LocationStuff {
 	{
 		eb = neweb;
 		loadLocation();
+		saveLocation();
 	}
 	
 	public void addLocation(String name, Location l)
 	{
-		eb.LocationList.add(new Locations(l, name));
+		eb.LocationList.add(new Locations(l, name, l.getWorld().getName()));
 		saveLocation();
 	}
 	
@@ -52,7 +53,7 @@ public class LocationStuff {
 					String name = Splits[0];
 					Location l = new Location(Bukkit.getWorld(Splits[1]), Double.parseDouble(Splits[2]), Double.parseDouble(Splits[3]), Double.parseDouble(Splits[4]));
 					
-					eb.LocationList.add(new Locations(l, name));
+					eb.LocationList.add(new Locations(l, name, Splits[1]));
 				}
 			}
 		}
@@ -65,7 +66,7 @@ public class LocationStuff {
 			List<String> saved = new ArrayList<String>();
 			for(Locations loc : eb.LocationList)
 			{
-				String save = loc.getName() + ":" + loc.getLocation().getWorld().getName() + ":" + ((int) loc.getLocation().getX()) + ":" + ((int) loc.getLocation().getY()) + ":" + ((int) loc.getLocation().getZ());
+				String save = loc.getName() + ":" + loc.getWorldName() + ":" + ((int) loc.getLocation().getX()) + ":" + ((int) loc.getLocation().getY()) + ":" + ((int) loc.getLocation().getZ());
 				saved.add(save);
 			}
 			eb.SavedData.reloadCustomConfig();
