@@ -71,6 +71,7 @@ public class Bossmsg {
 					eb.skillhandler.event = new BossSkillEvent(eb, b, "bossmsg", false);
 					Bukkit.getServer().getPluginManager().callEvent(eb.skillhandler.event);
 					s = s.replace("_", " ");
+					s = s.replace("@", ":");
 					if(p != null && pla != null)
 						s = s.replace("$player", pla.getName());
 					s = s.replace("$boss", b.getName());

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 import me.ThaH3lper.com.EpicBoss;
 
@@ -87,6 +88,17 @@ public class LocationStuff {
 			}
 		}
 		return false;
+	}
+	public Player getPlayer(String name)
+	{
+			for(Player p : Bukkit.getServer().getOnlinePlayers())
+			{
+				if(p.getName().equals(name))
+				{
+					return p;
+				}
+			}
+		return null;
 	}
 	public Locations getLocations(String name)
 	{

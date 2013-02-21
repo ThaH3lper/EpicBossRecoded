@@ -10,6 +10,7 @@ import me.ThaH3lper.com.Timer.Timer;
 import me.ThaH3lper.com.locations.Locations;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -25,6 +26,7 @@ public class CommandsConsole {
 		if(args.length == 0)
 		{
 			sender.sendMessage(ChatColor.RED + "/eb boss spawn <BossName> <location>" + ChatColor.GRAY + ChatColor.ITALIC + " Spawn a Boss");
+			sender.sendMessage(ChatColor.RED + "/eb boss spawn <BossName> <Player>" + ChatColor.GRAY + ChatColor.ITALIC + " Spawn a Boss at Player");
 			sender.sendMessage(ChatColor.RED + "/eb boss killall " + ChatColor.GRAY + ChatColor.ITALIC + " kills all bosses");
 			sender.sendMessage(ChatColor.RED + "/eb boss killtype <BossName " + ChatColor.GRAY + ChatColor.ITALIC + " kills all bosses with that name");
 			sender.sendMessage(ChatColor.RED + "/eb location list" + ChatColor.GRAY + ChatColor.ITALIC + " list all locations");
@@ -177,6 +179,14 @@ public class CommandsConsole {
 						Locations loc = eb.locationstuff.getLocations(args[3]);
 						sender.sendMessage(ChatColor.GREEN + "You spawned " + ChatColor.DARK_PURPLE + lb.getName() + ChatColor.GREEN + " and he has " + ChatColor.DARK_PURPLE + lb.getHealth() + ChatColor.GREEN + " Hp at " + ChatColor.DARK_PURPLE + args[3]);
 						eb.BossList.add(new Boss(lb.getName(), lb.getHealth(), loc.getLocation(), lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems(), lb.getSkills()));
+						
+						eb.timer.despawn.DeSpawnEvent(eb);
+					}
+					else if(eb.locationstuff.getPlayer(args[3]) != null)
+					{
+						Location loc = eb.locationstuff.getPlayer(args[3]).getLocation();
+						sender.sendMessage(ChatColor.GREEN + "You spawned " + ChatColor.DARK_PURPLE + lb.getName() + ChatColor.GREEN + " and he has " + ChatColor.DARK_PURPLE + lb.getHealth() + ChatColor.GREEN + " Hp at player " + ChatColor.DARK_PURPLE + args[3]);
+						eb.BossList.add(new Boss(lb.getName(), lb.getHealth(), loc, lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems(), lb.getSkills()));
 						
 						eb.timer.despawn.DeSpawnEvent(eb);
 					}
