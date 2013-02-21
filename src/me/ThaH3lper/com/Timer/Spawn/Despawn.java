@@ -7,6 +7,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.getspout.spoutapi.Spout;
+import org.getspout.spoutapi.player.EntitySkinType;
 
 public class Despawn {
 	
@@ -45,6 +47,14 @@ public class Despawn {
 						boss.setEntity(l);
 						eb.loadbossequip.SetEqupiment(boss);
 						eb.skillhandler.skills(boss, null);
+						if(eb.SpoutEnabled && boss.getSkinUrl() != null)
+						{
+							Spout.getServer().setEntitySkin(l, boss.getSkinUrl(), EntitySkinType.DEFAULT);
+						}
+						if(eb.SpoutEnabled && boss.isTitleShowed())
+						{
+							Spout.getServer().setTitle(l, boss.getEntitySpawnName());
+						}
 						
 					}
 				}

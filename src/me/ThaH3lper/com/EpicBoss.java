@@ -33,6 +33,9 @@ public class EpicBoss extends JavaPlugin{
 	
 	public final Logger logger = Logger.getLogger("Minecraft");
 	
+	public boolean SpoutEnabled;
+	PluginManager manager;
+	
 	//Constructor start
 	public EpicBoss plugin;
 	public BossCalculations bossCalculator;
@@ -75,7 +78,7 @@ public class EpicBoss extends JavaPlugin{
 		    @Override 
 		    public void run() {
 
-		PluginManager manager = plugin.getServer().getPluginManager();
+		manager = plugin.getServer().getPluginManager();
 		manager.registerEvents(new DamageListener(plugin), plugin);
 		manager.registerEvents(new BossEggListener(plugin), plugin);
 		
@@ -101,6 +104,9 @@ public class EpicBoss extends JavaPlugin{
 		timerstuff = new TimerStuff(plugin);
 		timer = new TimerSeconds(plugin);
 		api = new Api(plugin);
+		
+		if ((plugin.manager.isPluginEnabled("Spout")))
+			SpoutEnabled = true;
 		
 		name = Options.getCustomConfig().getString("BossTitle");
 		name = ChatColor.translateAlternateColorCodes('&', name);

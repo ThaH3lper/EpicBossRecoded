@@ -24,10 +24,11 @@ public class LoadConfigs {
 		{
 			for(String name : eb.Bosses.getCustomConfig().getConfigurationSection("Bosses").getKeys(false))
 			{
-				String Name, Type;
+				String Name, Type, Skin = null;
 				int Health, Damage;
 				List<String> Items = new ArrayList<String>(), Skills = new ArrayList<String>();
 				boolean showhp;
+				boolean showtitle = false;
 				
 				Name = name;
 				Type = eb.Bosses.getCustomConfig().getString("Bosses." + name + ".Type");
@@ -41,9 +42,17 @@ public class LoadConfigs {
 				{
 					Skills = eb.Bosses.getCustomConfig().getStringList("Bosses." + name + ".Skills");
 				}
+				if(eb.Bosses.getCustomConfig().contains("Bosses." + name + ".Skin") == true)
+				{
+					Skin = eb.Bosses.getCustomConfig().getString("Bosses." + name + ".Skin");
+				}
+				if(eb.Bosses.getCustomConfig().contains("Bosses." + name + ".Showtitle") == true)
+				{
+					showtitle = eb.Bosses.getCustomConfig().getBoolean("Bosses." + name + ".Showtitle");
+				}
 				showhp = eb.Bosses.getCustomConfig().getBoolean("Bosses." + name + ".Showhp");
 				
-				eb.BossLoadList.add(new LoadBoss(Name, Type, Health, Damage, Items, showhp, Skills));
+				eb.BossLoadList.add(new LoadBoss(Name, Type, Health, Damage, Items, showhp, Skills, Skin, showtitle));
 			}
 		}
 	}
