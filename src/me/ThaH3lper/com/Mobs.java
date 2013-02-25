@@ -33,6 +33,11 @@ public class Mobs {
 		}
 		else
 		{
+			if(mobname.equals("creeper"))
+			{
+				Entity liver = l.getWorld().spawnEntity(l, EntityType.CREEPER);
+				return liver;
+			}
 			if(mobname.equals("wither"))
 			{
 				Entity liver = l.getWorld().spawnEntity(l, EntityType.WITHER);

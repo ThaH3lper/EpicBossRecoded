@@ -11,6 +11,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -24,6 +25,7 @@ import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.EntityTameEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -119,7 +121,9 @@ public class DamageListener implements Listener{
 							Player p = (Player) Damager;
 							if(eb.percentage == false)
 							{
-									String s = eb.name + ChatColor.RED + boss.getName() + ChatColor.GRAY + " [" +ChatColor.DARK_RED + boss.getHealth() + ChatColor.GRAY + "/" + ChatColor.DARK_RED + boss.getMaxHealth() + ChatColor.GRAY + "]";
+									String bossName = boss.getName();
+									bossName = bossName.replace("_", " ");
+									String s = eb.name + ChatColor.RED + bossName + ChatColor.GRAY + " [" +ChatColor.DARK_RED + boss.getHealth() + ChatColor.GRAY + "/" + ChatColor.DARK_RED + boss.getMaxHealth() + ChatColor.GRAY + "]";
 									p.sendMessage(s);							
 							}
 							else
@@ -127,7 +131,9 @@ public class DamageListener implements Listener{
 								double per = (((double)boss.getHealth()/boss.getMaxHealth())*10)+1;
 								if(!boss.hasPercent((int)per))
 								{
-									String s = eb.name + ChatColor.RED + boss.getName() + ChatColor.GRAY + " [" +ChatColor.DARK_RED + ((int)per*10) + "%" + ChatColor.GRAY + "]";
+									String bossName = boss.getName();
+									bossName = bossName.replace("_", " ");
+									String s = eb.name + ChatColor.RED + bossName + ChatColor.GRAY + " [" +ChatColor.DARK_RED + ((int)per*10) + "%" + ChatColor.GRAY + "]";
 									for(Player player : eb.skillhandler.getPlayersRadious(20, boss))
 									{
 										player.sendMessage(s);
@@ -174,6 +180,18 @@ public class DamageListener implements Listener{
 		{
 			e.setCancelled(true);
 		}
+	}
+	@EventHandler(priority=EventPriority.HIGH)
+	  public void NoBlowCreeper(EntityExplodeEvent e)
+	{
+		if(eb.bossCalculator.isBoss(e.getEntity()))
+		{
+			e.getEntity().remove();
+			   eb.getServer().getScheduler().scheduleSyncDelayedTask(eb, new Runnable() {
+				   	public void run() {eb.timer.despawn.DeSpawnEvent(eb);}
+			   }, 1L);
+		}
+		
 	}
 	
 }

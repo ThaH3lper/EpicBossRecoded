@@ -39,7 +39,7 @@ public class BossEgg {
 		}
 		else
 		{
-			p.sendMessage(ChatColor.DARK_RED + "There is no Boss whit that name!");
+			p.sendMessage(ChatColor.DARK_RED + "There is no Boss with that name!");
 		}
 	}
 

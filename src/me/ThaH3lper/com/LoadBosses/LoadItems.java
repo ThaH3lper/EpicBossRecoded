@@ -1,28 +1,68 @@
 package me.ThaH3lper.com.LoadBosses;
 
+import java.util.Random;
+
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 public class LoadItems {
+	Random r = new Random();
 	public ItemStack getItem(String s)
 	{
-		String[] parts = s.split(" ");
+		int data2 = 0;
+		int red = 0;
+		int green = 0;
+		int blue = 0;
 		
+		String[] parts = s.split(" ");
 		//FirstPart
 		String first = parts[0];
 		String[] PartItems = first.split(":");
-		Integer id = Integer.parseInt(PartItems[0]);
-		Integer data = Integer.parseInt(PartItems[1]);
+		
 		Integer amount = Integer.parseInt(PartItems[2]);
+		Integer id = Integer.parseInt(PartItems[0]);
+		if((id == 298 || id == 299 || id == 300 || id == 301) && PartItems[1].contains(","))
+		{
+			String[] spits = PartItems[1].split(",");
 			
-		int data2 = (int) data;
+			//Red
+			if(spits[0].equals("r"))
+				red = r.nextInt(255);
+			else
+				red = Integer.parseInt(spits[0]);
+			
+			//Green
+			if(spits[1].equals("r"))
+				green = r.nextInt(255);
+			else
+				green = Integer.parseInt(spits[1]);
+			
+			//Blue
+			if(spits[2].equals("r"))
+				blue = r.nextInt(255);
+			else
+				blue = Integer.parseInt(spits[2]);
+		}
+		else
+		{
+			Integer data = Integer.parseInt(PartItems[1]);
+			data2 = (int) data;
+		}
 		
 		//Create a Itemstack
 		ItemStack stack = new ItemStack(id, amount, (short) data2);
 		ItemMeta em = stack.getItemMeta();
+		if((id == 298 || id == 299 || id == 300 || id == 301) && PartItems[1].contains(","))
+		{
+			LeatherArmorMeta lm = (LeatherArmorMeta) em;
+			lm.setColor(Color.fromRGB(red, green, blue));
+			stack.setItemMeta(lm);
+		}
 		
 		//ThirdPart if it exicts
 		if(parts.length >= 3)
