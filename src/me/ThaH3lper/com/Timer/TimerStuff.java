@@ -119,7 +119,7 @@ public class TimerStuff {
 		Locations loc = eb.locationstuff.getLocations(time.getLocationStr());
 		if(lb != null && loc != null)
 		{
-			Boss b = new Boss(lb.getName(), lb.getHealth(), loc.getLocation(), lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems(), lb.getSkills());
+			Boss b = new Boss(lb.getName(), lb.getHealth(), loc.getLocation(), lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems(), lb.getSkills(), lb.getShowtitle(), lb.getSkin());
 			b.setTimer(time.getName());
 			eb.BossList.add(b);
 			

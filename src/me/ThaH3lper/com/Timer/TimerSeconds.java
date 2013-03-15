@@ -8,7 +8,7 @@ import me.ThaH3lper.com.Timer.Spawn.Despawn;
 
 public class TimerSeconds {
 
-	public Despawn despawn = new Despawn();
+	public Despawn despawn;
 	private EpicBoss eb;
 
 	/*
@@ -17,6 +17,7 @@ public class TimerSeconds {
 	public TimerSeconds(EpicBoss boss)
 	{
 		eb = boss;
+		despawn = new Despawn(eb);
 		eb.getServer().getScheduler().scheduleSyncRepeatingTask(eb, new Runnable() {
 		    @Override  
 		    public void run() {

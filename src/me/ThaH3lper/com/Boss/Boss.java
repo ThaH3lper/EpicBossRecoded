@@ -23,7 +23,7 @@ public class Boss {
 	private Boolean showtitle;
 	
 	
-	public Boss(String newname, int newmaxhealth, Location newspawnlocation, String newentityspawnname, int newdamage, boolean newshowHP, List<String> newItems, List<String> newSkills)
+	public Boss(String newname, int newmaxhealth, Location newspawnlocation, String newentityspawnname, int newdamage, boolean newshowHP, List<String> newItems, List<String> newSkills, boolean newshowTitle, String newskin)
 	{
 		name = newname;
 		MaxHealth = newmaxhealth;
@@ -38,6 +38,8 @@ public class Boss {
 		percent = new ArrayList<Integer>();
 		Effects = AddSkills();
 		Timer = "null";
+		showtitle = newshowTitle;
+		skin = newskin;
 	}
 	public int getDamage()
 	{

@@ -7,9 +7,11 @@ import java.util.logging.Logger;
 import me.ThaH3lper.com.Api.Api;
 import me.ThaH3lper.com.Boss.Boss;
 import me.ThaH3lper.com.Boss.BossCalculations;
+import me.ThaH3lper.com.Chunk.ChunkUnload;
 import me.ThaH3lper.com.Commands.CommandsHandler;
 import me.ThaH3lper.com.Damage.DamageListener;
 import me.ThaH3lper.com.Damage.DamageMethods;
+import me.ThaH3lper.com.Damage.HeroListener;
 import me.ThaH3lper.com.LoadBosses.DropItems;
 import me.ThaH3lper.com.LoadBosses.LoadBoss;
 import me.ThaH3lper.com.LoadBosses.LoadBossEquip;
@@ -24,16 +26,19 @@ import me.ThaH3lper.com.egg.BossEggListener;
 import me.ThaH3lper.com.locations.LocationStuff;
 import me.ThaH3lper.com.locations.Locations;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.herocraftonline.heroes.Heroes;
+
 public class EpicBoss extends JavaPlugin{
 	
 	public final Logger logger = Logger.getLogger("Minecraft");
 	
-	public boolean SpoutEnabled;
+	public boolean SpoutEnabled, HeroesEnabled;
 	PluginManager manager;
 	
 	//Constructor start
@@ -52,6 +57,10 @@ public class EpicBoss extends JavaPlugin{
 	public LocationStuff locationstuff;
 	public TimerStuff timerstuff;
 	public Api api;
+	public HeroListener heroListener;
+	public DamageListener damageListener;
+	
+	public Heroes heroes;
 	
 	public String name;
 	public boolean percentage;
@@ -77,10 +86,13 @@ public class EpicBoss extends JavaPlugin{
 		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 		    @Override 
 		    public void run() {
-
+		   
+		    	
+		damageListener = new DamageListener(plugin);
 		manager = plugin.getServer().getPluginManager();
-		manager.registerEvents(new DamageListener(plugin), plugin);
+		manager.registerEvents(damageListener, plugin);
 		manager.registerEvents(new BossEggListener(plugin), plugin);
+		manager.registerEvents(new ChunkUnload(plugin), plugin);
 		
 		PluginDescriptionFile pdfFile = plugin.getDescription();
 		plugin.logger.info("[EpicBoss-Recoded] " + pdfFile.getVersion() +  " Has Been Enabled!");
@@ -107,6 +119,15 @@ public class EpicBoss extends JavaPlugin{
 		
 		if ((plugin.manager.isPluginEnabled("Spout")))
 			SpoutEnabled = true;
+		if ((plugin.manager.isPluginEnabled("Heroes")))
+		{
+			HeroesEnabled = true;
+			heroes = (Heroes) Bukkit.getPluginManager().getPlugin("Heroes");
+			heroListener = new HeroListener(plugin, damageListener);
+			manager.registerEvents(heroListener, plugin);
+		}
+		
+		
 		
 		name = Options.getCustomConfig().getString("BossTitle");
 		name = ChatColor.translateAlternateColorCodes('&', name);

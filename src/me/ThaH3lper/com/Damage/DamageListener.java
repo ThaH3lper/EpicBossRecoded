@@ -11,7 +11,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -29,6 +28,8 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.EntityTameEvent;
 import org.bukkit.inventory.ItemStack;
 
+import com.herocraftonline.heroes.Heroes;
+
 public class DamageListener implements Listener{
 	private EpicBoss eb;
 	BossDeathEvent event;
@@ -40,22 +41,82 @@ public class DamageListener implements Listener{
 	@EventHandler(priority=EventPriority.HIGH)
 	  public void Damage(EntityDamageByEntityEvent e)
 	{
-		Entity Damager = e.getDamager();
-		Entity Hited = e.getEntity();
+		if(eb.HeroesEnabled == false)
+		{
+			if(DamageMethod(e.getDamager(), e.getEntity(), e.getDamage()))
+			{
+				e.setCancelled(true);
+			}
+			if(eb.bossCalculator.isBoss(e.getDamager()))
+			{
+				Boss boss = eb.bossCalculator.getBoss(e.getDamager());
+				e.setDamage(boss.getDamage());
+			}
+			else if(eb.bossCalculator.isBoss(e.getEntity()))
+			{
+				e.setDamage(1);
+			}
+		}
+	}
+	@EventHandler(priority=EventPriority.HIGH)
+	  public void BossNoLose(EntityDamageEvent event)
+	{
+		if(event.getEntity() != null)
+		{
+			if(eb.bossCalculator.isBoss(event.getEntity())){
+				if(!(event.getCause() == DamageCause.ENTITY_ATTACK || event.getCause() == DamageCause.PROJECTILE ||  event.getCause() == DamageCause.MAGIC ||  event.getCause() == DamageCause.CUSTOM))
+				{
+					event.setCancelled(true);
+				}
+			}
+		}
+	}
+	@EventHandler(priority=EventPriority.HIGH)
+	  public void BossNoFire(EntityCombustEvent e)
+	{	
+		if(eb.bossCalculator.isBoss(e.getEntity()))
+		{
+			e.setCancelled(true);
+		}
+	}
+	@EventHandler(priority=EventPriority.HIGH)
+	  public void NoTaming(EntityTameEvent e)
+	{
+		if(eb.bossCalculator.isBoss(e.getEntity()))
+		{
+			e.setCancelled(true);
+		}
+	}
+	@EventHandler(priority=EventPriority.HIGH)
+	  public void NoBlowCreeper(EntityExplodeEvent e)
+	{
+			e.getEntity().remove();
+			   eb.getServer().getScheduler().scheduleSyncDelayedTask(eb, new Runnable() {
+				   	public void run() {eb.timer.despawn.DeSpawnEvent(eb);}
+			   }, 1L);
+		
+		//eb.timer.despawn.DeSpawnEvent(eb);
+		
+	}
+	
+	  public boolean DamageMethod(Entity Damager, Entity Hited, int damage)
+	{
+		//Entity Damager = e.getDamager();
+		//Entity Hited = e.getEntity();
 		//Make Damager to a Living entity insted of Arrow, Fireball etc
 		//Also cheack if Arrow is not from dispenser;
+		//Implement hero stuff to see if damage has changed
 		if(Damager instanceof Arrow)
 		{
 			Arrow a = (Arrow) Damager;
 			Damager = a.getShooter();
 			if(Damager == null && eb.bossCalculator.isBoss(Hited))
 			{
-				e.setCancelled(true);
-				return;
+				return true;
 			}
 			else if(Damager == null)
 			{
-				return;
+				return false;
 			}
 		}
 		if(Damager instanceof Fireball)
@@ -87,13 +148,14 @@ public class DamageListener implements Listener{
 		{
 			if(eb.bossCalculator.isBoss(Damager) == false && eb.bossCalculator.isBoss(Hited) == false)
 			{
-				return;
+				return false;
 			}
-			int damage = e.getDamage();
+			
+			
 			LivingEntity hited = (LivingEntity) Hited; //Hited entity is now "hited" since it's a LivingEntity
 			if(eb.bossCalculator.isBoss(Hited))
 			{
-				e.setDamage(1);
+				//e.setDamage(1);
 				if(!eb.bossCalculator.BossHited(hited))
 				{
 					Boss boss = eb.bossCalculator.getBoss(Hited);
@@ -106,7 +168,17 @@ public class DamageListener implements Listener{
 					if(boss.getHealth() <= 0)
 					{
 						List<ItemStack> dropItems = eb.dropitems.getDrops(boss);
-						int exp = eb.dropitems.getExp(boss);
+						
+						int exp = eb.dropitems.getExp(boss);						
+						int hexp = eb.dropitems.getHeroesExp(boss);
+						if(eb.HeroesEnabled)
+						{
+							if(Damager instanceof Player)
+							{
+								eb.heroes.getCharacterManager().getHero((Player) Damager).addExp(hexp, eb.heroes.getCharacterManager().getHero((Player) Damager).getHeroClass() , boss.getLocation());
+							}
+						}
+						
 						if(Damager instanceof Player)
 						{
 							event = new BossDeathEvent(eb, (Player) Damager, boss, dropItems, exp);
@@ -145,53 +217,8 @@ public class DamageListener implements Listener{
 					}
 				}
 			}
-			else if(eb.bossCalculator.isBoss(Damager))
-			{
-				Boss boss = eb.bossCalculator.getBoss(Damager);
-				e.setDamage(boss.getDamage());
-			}
 		}
-	}
-	@EventHandler(priority=EventPriority.HIGH)
-	  public void BossNoLose(EntityDamageEvent event)
-	{
-		if(event.getEntity() != null)
-		{
-			if(eb.bossCalculator.isBoss(event.getEntity())){
-				if(!(event.getCause() == DamageCause.ENTITY_ATTACK || event.getCause() == DamageCause.PROJECTILE ||  event.getCause() == DamageCause.MAGIC))
-				{
-					event.setCancelled(true);
-				}
-			}
-		}
-	}
-	@EventHandler(priority=EventPriority.HIGH)
-	  public void BossNoFire(EntityCombustEvent e)
-	{	
-		if(eb.bossCalculator.isBoss(e.getEntity()))
-		{
-			e.setCancelled(true);
-		}
-	}
-	@EventHandler(priority=EventPriority.HIGH)
-	  public void NoTaming(EntityTameEvent e)
-	{
-		if(eb.bossCalculator.isBoss(e.getEntity()))
-		{
-			e.setCancelled(true);
-		}
-	}
-	@EventHandler(priority=EventPriority.HIGH)
-	  public void NoBlowCreeper(EntityExplodeEvent e)
-	{
-		if(eb.bossCalculator.isBoss(e.getEntity()))
-		{
-			e.getEntity().remove();
-			   eb.getServer().getScheduler().scheduleSyncDelayedTask(eb, new Runnable() {
-				   	public void run() {eb.timer.despawn.DeSpawnEvent(eb);}
-			   }, 1L);
-		}
-		
+		return false;
 	}
 	
 }

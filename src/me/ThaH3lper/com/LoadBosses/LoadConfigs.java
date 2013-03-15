@@ -107,7 +107,7 @@ public class LoadConfigs {
 						LoadBoss lb = getLoadBoss(Splits[0]);
 						Location l = new Location(Bukkit.getWorld(Splits[2]), (double )Integer.parseInt(Splits[3]), (double )Integer.parseInt(Splits[4]), (double )Integer.parseInt(Splits[5]));
 						
-						Boss bs = new Boss(lb.getName(), lb.getHealth(), l, lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems(), lb.getSkills());
+						Boss bs = new Boss(lb.getName(), lb.getHealth(), l, lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems(), lb.getSkills(), lb.getShowtitle(), lb.getSkin());
 						bs.sethealth(Integer.parseInt(Splits[1]));
 						if(!Splits[6].equals("null"));
 						{

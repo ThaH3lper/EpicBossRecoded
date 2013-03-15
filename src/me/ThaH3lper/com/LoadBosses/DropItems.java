@@ -7,12 +7,11 @@ import java.util.Random;
 import me.ThaH3lper.com.EpicBoss;
 import me.ThaH3lper.com.Boss.Boss;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
 
 public class DropItems {
 	Random r = new Random();
@@ -47,7 +46,7 @@ public class DropItems {
 			for(String s:b.getItems())
 			{
 				String[] part = s.split(" ");
-				if(!part[0].equalsIgnoreCase("exp"))
+				if(!part[0].equalsIgnoreCase("exp") && !part[0].equalsIgnoreCase("hexp"))
 				{
 					ItemStack sta = eb.dropitems.getDropsItems(eb.loaditems.getItem(s), eb.loaditems.getItemChance(s), eb.loaditems.getDisplayName(s));
 					if(sta != null)
@@ -67,6 +66,22 @@ public class DropItems {
 			{
 				String[] part = s.split(" ");
 				if(part[0].equalsIgnoreCase("exp"))
+				{
+					int i = Integer.parseInt(part[1]);
+					return i;
+				}
+			}	
+		}
+		return 0;
+	}
+	public int getHeroesExp(Boss b)
+	{
+		if(b.getItems() != null)
+		{
+			for(String s:b.getItems())
+			{
+				String[] part = s.split(" ");
+				if(part[0].equalsIgnoreCase("hexp"))
 				{
 					int i = Integer.parseInt(part[1]);
 					return i;

@@ -12,6 +12,14 @@ import org.getspout.spoutapi.player.EntitySkinType;
 
 public class Despawn {
 	
+	private EpicBoss eb;
+	
+	public Despawn(EpicBoss eb)
+	{
+		this.eb = eb;		
+	}
+	
+	
 	public void DeSpawnEvent(EpicBoss eb)
 	{
 		if(eb.BossList != null)
@@ -44,16 +52,28 @@ public class Despawn {
 						boss.setSaved(false);
 						LivingEntity l = (LivingEntity) eb.mobs.SpawnMob(boss.getEntitySpawnName(), boss.getSavedLocation());
 						l.setHealth(l.getMaxHealth() - 1);
+						
 						boss.setEntity(l);
 						eb.loadbossequip.SetEqupiment(boss);
 						eb.skillhandler.skills(boss, null);
+						
+						//Heroes set damage to heroes! Working damage of Boss
+						if(eb.HeroesEnabled)
+						{						
+							eb.heroes.getCharacterManager().getMonster(l).setDamage(boss.getDamage());
+							eb.heroes.getCharacterManager().getMonster(l).setMaxHealth(999999999);
+						}
+						//end
+						
 						if(eb.SpoutEnabled && boss.getSkinUrl() != null)
 						{
 							Spout.getServer().setEntitySkin(l, boss.getSkinUrl(), EntitySkinType.DEFAULT);
+							Bukkit.broadcastMessage("!");
 						}
 						if(eb.SpoutEnabled && boss.isTitleShowed())
 						{
-							Spout.getServer().setTitle(l, boss.getEntitySpawnName());
+							String s = boss.getName().replace("_", " ");
+							Spout.getServer().setTitle(l, s);
 						}
 						
 					}

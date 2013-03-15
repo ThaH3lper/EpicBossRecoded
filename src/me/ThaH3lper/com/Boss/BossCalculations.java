@@ -5,6 +5,8 @@ import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
+import com.herocraftonline.heroes.Heroes;
+
 import me.ThaH3lper.com.EpicBoss;
 
 public class BossCalculations {
@@ -67,6 +69,10 @@ public class BossCalculations {
 	}
 	public Boolean BossHited(LivingEntity e)
 	{
+		if(eb.HeroesEnabled)
+		{		
+			return false;
+		}
 		if(e.getHealth() == e.getMaxHealth())
 		{
 			return true;

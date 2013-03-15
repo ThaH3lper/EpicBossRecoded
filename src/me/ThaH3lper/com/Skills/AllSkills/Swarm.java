@@ -79,7 +79,7 @@ public class Swarm {
 					while( i <= amount)
 					{
 						i++;
-						eb.BossList.add(new Boss(lb.getName(), lb.getHealth(), b.getLocation(), lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems(), lb.getSkills()));
+						eb.BossList.add(new Boss(lb.getName(), lb.getHealth(), b.getLocation(), lb.getType(), lb.getDamage(), lb.getShowhp(), lb.getItems(), lb.getSkills(), lb.getShowtitle(), lb.getSkin()));
 					}
 				}
 			}
