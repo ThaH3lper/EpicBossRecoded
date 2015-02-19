@@ -1,4 +1,4 @@
-# EpicBoss - A mincraft plugin
+# EpicBossRecoded - A mincraft plugin
 A recoded version of EpicBoss (https://github.com/ThaH3lper/EpicBoss) and released on 22 Dec 2012.
 The projekt was Re-Engineered/Coded and released as EpicBoss Gold Edition (https://github.com/ThaH3lper/EpicBossGoldEdition)
 on Sep 24, 2013.
